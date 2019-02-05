@@ -1,3 +1,5 @@
+package matrix;
+
 import java.util.List;
 
 public interface Matrix {
