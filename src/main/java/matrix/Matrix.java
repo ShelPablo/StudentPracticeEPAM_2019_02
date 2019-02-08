@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface Matrix {
 
+    List<List<Double>> getMatrix();
+
     double get(int rowIdx, int colIdx);
 
     List<Double> getRow(int rowIdx);

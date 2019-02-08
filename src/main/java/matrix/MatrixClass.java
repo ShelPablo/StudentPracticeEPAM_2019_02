@@ -21,14 +21,14 @@ public class MatrixClass implements Matrix {
                 (colIdx >= 0) && (colIdx < getSize(2))) {
             return matrix.get(rowIdx).get(colIdx);
         }
-        else throw new IllegalArgumentException("Row index or column index out of dimension");
+        else throw new IllegalArgumentException("Row index or column index out of bounds");
     }
 
     public List<Double> getRow(int rowIdx){
         if ((rowIdx >= 0) && (rowIdx < getSize(1))) {
             return matrix.get(rowIdx);
         }
-        else throw new IllegalArgumentException("Row index out of dimension");
+        else throw new IllegalArgumentException("Row index out of bounds");
     }
 
     public List<Double> getCol(int colIdx) {
@@ -39,7 +39,7 @@ public class MatrixClass implements Matrix {
             }
             return column;
         }
-        else throw new IllegalArgumentException("Column index out of dimension");
+        else throw new IllegalArgumentException("Column index out of bounds");
     }
 
     /*transpose matrix*/
@@ -65,7 +65,7 @@ public class MatrixClass implements Matrix {
             }
             return new MatrixClass(this.matrix);
         }
-        else throw new IllegalArgumentException("Matrices are not the same dimension");
+        else throw new IllegalArgumentException("Matrices dimensions must be equal");
     }
 
     /*row-on-column matrix multiplication*/
@@ -88,7 +88,7 @@ public class MatrixClass implements Matrix {
             return new MatrixClass(result);
         }
         else throw new IllegalArgumentException(
-                "The number of columns in the first matrix and the number of rows in the second matrix do not match");
+                "The number of columns in the first matrix and the number of rows in the second matrix must be equal");
     }
 
     public int getSize(int dimension){
