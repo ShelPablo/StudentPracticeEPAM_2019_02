@@ -87,6 +87,7 @@ public class MatrixImplementationTest {
     @Test
     public void x() {
         Matrix matrix = this.getTestMatrix();
+		
         ArrayList<ArrayList<Double>> multArray = new ArrayList<ArrayList<Double>>();
         multArray.add(new ArrayList<Double>(){{add(4.0);add(8.0);}});
         multArray.add(new ArrayList<Double>(){{add(5.0);add(11.0);}});
