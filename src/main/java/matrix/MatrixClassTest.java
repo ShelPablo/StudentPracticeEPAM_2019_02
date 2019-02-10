@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class MatrixClassTest {
 
     @Test
@@ -21,7 +19,7 @@ public class MatrixClassTest {
         Matrix matrix = new MatrixClass(_matrix);
 
         double expectedValue = matrix.get(1, 1);
-        // Данные для сравнения
+        // Required output
         double actualValue = 8.;
 
         Assert.assertEquals(expectedValue, actualValue, 0.);
@@ -37,7 +35,7 @@ public class MatrixClassTest {
         Matrix matrix = new MatrixClass(_matrix);
 
         List<Double> expectedRow = matrix.getRow(0);
-        // Данные для сравнения
+        // Required output
         List<Double> actualRow = new ArrayList<>(Arrays.asList(1., 2., 6., 5.));
 
         Assert.assertEquals(expectedRow, actualRow);
@@ -53,7 +51,7 @@ public class MatrixClassTest {
         Matrix matrix = new MatrixClass(_matrix);
 
         List<Double> expectedCol = matrix.getCol(1);
-        // Данные для сравнения
+        // Required output
         List<Double> actualCol = new ArrayList<>(Arrays.asList(3., 8.));
 
         Assert.assertEquals(expectedCol, actualCol);
@@ -70,7 +68,7 @@ public class MatrixClassTest {
 
         MatrixClass expectedMatrix = (MatrixClass)matrix1.t();
 
-        // Данные для сравнения
+        // Required output
         List<List<Double>> _matrix2 = new ArrayList<>();
 
         _matrix2.add(new ArrayList<>(Arrays.asList(1., 1.)));
@@ -97,7 +95,7 @@ public class MatrixClassTest {
 
         MatrixClass expectedMatrix = (MatrixClass)matrix1.dot(matrix2);
 
-        // Данные для сравнения
+        // Required output
         List<List<Double>> _actualMatrix = new ArrayList<>();
         _actualMatrix.add(new ArrayList<>(Arrays.asList(1., 5.)));
         _actualMatrix.add(new ArrayList<>(Arrays.asList(5., 9.)));
@@ -121,7 +119,7 @@ public class MatrixClassTest {
         Matrix matrix2 = new MatrixClass(_matrix2);
 
         MatrixClass expectedMatrix = (MatrixClass)matrix1.x(matrix2);
-        // Данные для сравнения
+        // Required output
         List<List<Double>> _actualMatrix = new ArrayList<>();
         _actualMatrix.add(new ArrayList<>(Arrays.asList(30., 45.)));
         _actualMatrix.add(new ArrayList<>(Arrays.asList(10., 30.)));
@@ -140,7 +138,7 @@ public class MatrixClassTest {
         Matrix matrix = new MatrixClass(_matrix);
 
         int expectedSize = matrix.getSize(2);
-        // Данные для сравнения
+        // Required output
         int actualSize = 4;
 
         Assert.assertEquals(expectedSize, actualSize);
