@@ -6,8 +6,6 @@ public interface Matrix {
     
     List<List<Double>> getMatrix();
 
-    List<List<Double>> getMatrix();
-
     double get(int rowIdx, int colIdx);
 
     List<Double> getRow(int rowIdx);
