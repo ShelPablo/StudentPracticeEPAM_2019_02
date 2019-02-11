@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface Matrix {
 
+
     List<List<Double>> getMatrix();
 
     double get(int rowIdx, int colIdx);
@@ -19,7 +20,7 @@ public interface Matrix {
     Matrix dot(Matrix matrix);
 
     /*row-on-column matrix multiplication*/
-    Matrix x(Matrix matrix);
+    Matrix x(Matrix matrix) ;
 
     /**
      *
@@ -27,5 +28,7 @@ public interface Matrix {
      * @return number of rows/columns
      */
     int getSize(int dimension);
-
 }
+
+
+
