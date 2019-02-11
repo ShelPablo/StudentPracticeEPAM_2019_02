@@ -2,7 +2,9 @@ package imageprocessor;
 
 import matrix.Matrix;
 
+import java.util.List;
+
 public interface ImageLoader {
 
-    Matrix loadImageAsMatrix(String filename);
+    List<Matrix> loadImageAsMatrix(String filename);
 }
