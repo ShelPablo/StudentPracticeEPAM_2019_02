@@ -10,11 +10,10 @@ import java.util.List;
 
 public abstract class ImageProcessor {
 
-    //класс изображения(?) будет наследовать этот абстрактный класс и реализовывать loadImage - полная изоляция таким образом
 
-    private ImageLoader imageLoader;//типо "объект интерфейса" - чтобы матрица не знала откуда она взялась
+    private ImageLoader imageLoader;
 
-    private List<Matrix> image;//возвращаемое значение  в размере 3 матриц!
+    private List<Matrix> image;
 
     public List<Matrix> loadImage(String filename) {
 
