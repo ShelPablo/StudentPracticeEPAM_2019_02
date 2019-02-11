@@ -23,6 +23,7 @@ public class ImageLoaderClass implements ImageLoader {
         List<List<Double>> green = new ArrayList<>();
         List<List<Double>> blue = new ArrayList<>();
 
+        //create 3 matrix (RGB) from image
         if (bufImg == null) {
             throw new RuntimeException("Image Error");
         } else {

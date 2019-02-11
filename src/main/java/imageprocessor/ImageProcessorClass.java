@@ -30,6 +30,7 @@ public class ImageProcessorClass extends ImageProcessor {
         int width = image.get(0).getSize(2);
         int height = image.get(0).getSize(1);
 
+        //window for image
         JFrame frame = new JFrame();
         frame.setPreferredSize(new Dimension(width,height));
         frame.setResizable(false);
