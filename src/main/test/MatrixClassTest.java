@@ -1,5 +1,5 @@
-package matrix;
-
+import matrix.Matrix;
+import matrix.MatrixClass;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -4,6 +4,6 @@ import matrix.Matrix;
 
 import java.util.List;
 
-public interface    Layer {
+public interface Layer {
     List<Matrix> apply(List<Matrix> input);
 }

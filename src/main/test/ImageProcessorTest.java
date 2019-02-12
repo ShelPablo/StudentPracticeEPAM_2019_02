@@ -1,5 +1,4 @@
-package imageprocessor;
-
+import imageprocessor.ImageProcessorClass;
 import org.junit.Test;
 
 public class ImageProcessorTest {
