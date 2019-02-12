@@ -66,16 +66,14 @@ class ImageFrame extends JFrame
         }
         Image showimage = img;
         setTitle("ImageObserver");
-        int imageWidth = showimage.getWidth(this);
-        int imageHeight = showimage.getHeight(this);
-        if (imageHeight < 200 || imageWidth < 200)
+        if (HEIGHT < 200 || WIDTH < 200)
         {
             setTitle("UpscaledImageObserver");
             int scaleCoef = 1;
-            if (imageHeight >= imageWidth) {scaleCoef = 200/imageHeight;}
-            else { scaleCoef = 200/imageWidth; }
+            if (HEIGHT >= WIDTH) {scaleCoef = 200/WIDTH;}
+            else { scaleCoef = 200/WIDTH; }
 
-            showimage = showimage.getScaledInstance(imageWidth*scaleCoef, imageHeight*scaleCoef, Image.SCALE_SMOOTH);
+            showimage = showimage.getScaledInstance(WIDTH*scaleCoef, HEIGHT*scaleCoef, Image.SCALE_SMOOTH);
         }
         setSize(showimage.getWidth(this), showimage.getHeight(this));
         ImageComponent component = new ImageComponent(showimage);
@@ -102,7 +100,6 @@ class ImageComponent extends JComponent
 
             image = image.getScaledInstance(imageWidth*scaleCoef, imageHeight*scaleCoef, Image.SCALE_SMOOTH);
         }
-        // Display image in the left corner
         g.drawImage(image, 0, 0, null);
     }
     private Image image;
