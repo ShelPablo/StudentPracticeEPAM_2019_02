@@ -20,6 +20,16 @@ public class ImageProcessorClass extends ImageProcessor {
 
     private List<Matrix> image;
 
+    public ImageProcessorClass(List<Matrix> matrixList)
+    {
+        this.image = matrixList;
+    }
+
+    public ImageProcessorClass()
+    {
+        //Empty constructor
+    }
+
     public List<Matrix> loadImage(String filename) {
         this.imageLoader = new ImageLoaderClass();
         this.filename = filename;
@@ -38,6 +48,7 @@ public class ImageProcessorClass extends ImageProcessor {
             }
         });
     }
+
 }
 
 class ImageFrame extends JFrame
@@ -66,12 +77,21 @@ class ImageFrame extends JFrame
         }
         Image showimage = img;
         setTitle("ImageObserver");
-        if (HEIGHT < 200 || WIDTH < 200)
+        if (HEIGHT < 50 || WIDTH < 50)
         {
             setTitle("UpscaledImageObserver");
             int scaleCoef = 1;
-            if (HEIGHT >= WIDTH) {scaleCoef = 200/WIDTH;}
-            else { scaleCoef = 200/WIDTH; }
+            if (HEIGHT >= WIDTH) {scaleCoef = 150/WIDTH;}
+            else { scaleCoef = 150/WIDTH; }
+
+            showimage = showimage.getScaledInstance(WIDTH*scaleCoef, HEIGHT*scaleCoef, Image.SCALE_SMOOTH);
+        }
+        else if (HEIGHT < 200 || WIDTH < 200)
+        {
+            setTitle("UpscaledImageObserver");
+            int scaleCoef = 1;
+            if (HEIGHT >= WIDTH) {scaleCoef = 600/WIDTH;}
+            else { scaleCoef = 600/WIDTH; }
 
             showimage = showimage.getScaledInstance(WIDTH*scaleCoef, HEIGHT*scaleCoef, Image.SCALE_SMOOTH);
         }
@@ -90,16 +110,6 @@ class ImageComponent extends JComponent
 
     public void paintComponent(Graphics g) {
         if (image == null) return;
-        int imageWidth = image.getWidth(this);
-        int imageHeight = image.getHeight(this);
-        if (imageHeight < 200 || imageWidth < 200)
-        {
-            int scaleCoef = 1;
-            if (imageHeight >= imageWidth) {scaleCoef = 200/imageHeight;}
-            else { scaleCoef = 200/imageWidth; }
-
-            image = image.getScaledInstance(imageWidth*scaleCoef, imageHeight*scaleCoef, Image.SCALE_SMOOTH);
-        }
         g.drawImage(image, 0, 0, null);
     }
     private Image image;
