@@ -18,15 +18,15 @@ public abstract class AbstractLayeredNeuralNetwork {
 
 
     public void build() {
-        layers.stream()
-                .
+        layers.stream();
+
     }
 
 
 
     public List<Matrix>  apply(List<Matrix> input) {
         layers.getFirst().setInput(input);
-        layers.forEach(l->l.apply());
+        //layers.forEach(l->l.apply());
         return layers.getLast().getOutput();
     };
 

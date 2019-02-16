@@ -4,7 +4,7 @@ import matrix.Matrix;
 
 import java.util.List;
 
-public class ConvLayer implements Layer {
+public abstract class ConvLayer implements Layer {
 
     List<Matrix> kernel;
 
