@@ -95,7 +95,7 @@ public class AlexNetKernelsVisualiser {
             normalizedMatrix.add(new ArrayList<Double>());
             for (int j = 0; j < matrix.getSize(2); j++)
             {
-                normalizedMatrix.get(i).add(((matrix.get(i,j)+min)/(max+min))*255);
+                normalizedMatrix.get(i).add(((matrix.get(i,j)-min)/(max-min))*255);
             }
         }
         return new MatrixClass(normalizedMatrix);

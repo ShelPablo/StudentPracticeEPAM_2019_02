@@ -57,24 +57,5 @@ public class KernelsReader {
         return kernels;
     }
 
-    public static void main(String[] args){
 
-        List<List<Matrix>> kernels = KernelsReader.readKernelsFromFile("src/main/resources/AlexK.txt");
-
-        for (List<Matrix> list: kernels){
-            for (Matrix m: list){
-                for (int i = 0; i < 11; i++){
-                    for (int j = 0; j < 11; j++){
-                        System.out.print(m.get(i, j) + " ");
-                    }
-                    System.out.println(" ");
-                }
-                System.out.println(" ");
-                System.out.println(" ");
-            }
-            System.out.println(" ");
-            System.out.println(" ");
-            System.out.println(" ");
-        }
-    }
 }
