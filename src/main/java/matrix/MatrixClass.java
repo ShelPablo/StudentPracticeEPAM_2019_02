@@ -54,18 +54,23 @@ public class MatrixClass implements Matrix {
     }
 
     /*element-by-element multiplication*/
-    public Matrix dot(Matrix matrix){
-        if ((getSize(1) == matrix.getSize(1)) &&
-                (getSize(2) == matrix.getSize(2)))
-        {
-            for (int i = 0; i < getSize(1); i++){
-                for (int j = 0; j < getSize(2); j++){
-                    this.matrix.get(i).set(j,this.matrix.get(i).get(j) * matrix.get(i,j));
-                }
-            }
-            return new MatrixClass(this.matrix);
+   public Matrix dot(Matrix matrix) {
+
+        if (getSize(1) != matrix.getSize(1) &&
+                getSize(2) != matrix.getSize(2)) {
+            throw new RuntimeException("Matrix sizes are different");
         }
-        else throw new IllegalArgumentException("Matrices dimensions must be equal");
+
+        List<List<Double>> hadamardMatrix = new ArrayList<List<Double>>();
+
+        for (int i = 0; i < getSize(1); i++) {
+            List<Double> rowHadamartMatrix = new ArrayList<Double>();
+            for (int j = 0; j < getSize(2); j++) {
+                rowHadamartMatrix.add(get(i, j) * matrix.get(i, j));
+            }
+            hadamardMatrix.add(rowHadamartMatrix);
+        }
+        return new MatrixClass(hadamardMatrix);
     }
 
     /*row-on-column matrix multiplication*/
