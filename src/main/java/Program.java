@@ -1,4 +1,5 @@
 import layer.AlexNetKernelsVisualiser;
+import layer.KernelsReader;
 import matrix.Matrix;
 import matrix.MatrixClass;
 
@@ -31,7 +32,8 @@ public class Program {
             }
             kernels.add(img);
         }
+        List<List<Matrix>> kernelss = KernelsReader.readKernelsFromFile("src/main/resources/AlexK.txt");
         AlexNetKernelsVisualiser sh = new AlexNetKernelsVisualiser();
-        sh.ShowKernels(kernels);
+        sh.ShowKernels(kernelss);
     }
 }

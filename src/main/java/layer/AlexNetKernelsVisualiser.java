@@ -16,7 +16,10 @@ public class AlexNetKernelsVisualiser {
         {
             for (int y = 0; y < 3; y++)
             {
-                kernelsList.get(x).set(y, this.NormalizeMatrix(kernelsList.get(x).get(y)));
+                Matrix m = this.NormalizeMatrix(kernelsList.get(x).get(y));
+                m = m.t();
+                m = m.t();
+                kernelsList.get(x).set(y, m);
             }
         }
         List<Double[][]> image = new ArrayList<>();
@@ -91,11 +94,31 @@ public class AlexNetKernelsVisualiser {
         List<List<Double>> normalizedMatrix = new ArrayList<>();
         double min = getMin(matrix);
         double max = getMax(matrix);
+        double move = 0;
+        //if (min < 0)
+       // {
+       //     move = Math.abs(min);
+        //    min += move;
+        //    max += move;
+       // }
+        double scaleCoef = 0.;
+        if (Math.abs(min) > Math.abs(max)) {
+            double buf = 0;
+            buf = min;
+            max = min;
+            min = buf;
+            scaleCoef = 56.25 / Math.abs(min);
+        }
+        else {
+           scaleCoef = 56.25 / (max);
+        }
+        //max += min;
         for (int i = 0; i < matrix.getSize(1); i++) {
             normalizedMatrix.add(new ArrayList<Double>());
             for (int j = 0; j < matrix.getSize(2); j++)
             {
-                normalizedMatrix.get(i).add(((matrix.get(i,j)+min)/(max+min))*255);
+                //normalizedMatrix.get(i).add(((matrix.get(i,j)+move+min)/(max+min))*255);
+                normalizedMatrix.get(i).add(112.5+matrix.get(i,j)*317);
             }
         }
         return new MatrixClass(normalizedMatrix);

@@ -49,6 +49,18 @@ public class ImageProcessorClass extends ImageProcessor {
         });
     }
 
+    public void showImage(List<Matrix> img) {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                ImageFrame frame = new ImageFrame(img);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            }
+        });
+    }
+
 }
 
 class ImageFrame extends JFrame
