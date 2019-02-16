@@ -1,13 +1,12 @@
 package matrix;
 
+import layer.AlexNetKernelsVisualiser;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class MatrixClassTest {
 
@@ -57,6 +56,32 @@ public class MatrixClassTest {
         List<Double> actualCol = new ArrayList<>(Arrays.asList(3., 8.));
 
         Assert.assertEquals(expectedCol, actualCol);
+    }
+
+    @Test
+    public void getMin()
+    {
+        List<List<Double>> _matrix = new ArrayList<>();
+
+        _matrix.add(new ArrayList<>(Arrays.asList(3., 12., 6., 0.)));
+        _matrix.add(new ArrayList<>(Arrays.asList(4., 8., 7., 9.)));
+
+        Matrix matrix = new MatrixClass(_matrix);
+        AlexNetKernelsVisualiser shower = new AlexNetKernelsVisualiser();
+        Assert.assertEquals(0, (int)shower.getMin(matrix) );
+    }
+
+    @Test
+    public void getMax()
+    {
+        List<List<Double>> _matrix = new ArrayList<>();
+
+        _matrix.add(new ArrayList<>(Arrays.asList(3., 12., 6., 5.)));
+        _matrix.add(new ArrayList<>(Arrays.asList(4., 8., 7., 9.)));
+
+        Matrix matrix = new MatrixClass(_matrix);
+        AlexNetKernelsVisualiser shower = new AlexNetKernelsVisualiser();
+        Assert.assertEquals(12, (int)shower.getMax(matrix) );
     }
 
     @Test
