@@ -53,7 +53,7 @@ public abstract class ConvLayerClass implements Layer {
             for (int i = 0; i < (rgbInputMatrix.getSize(1) - ((rgbInputMatrix.getSize(1) % this.stride) * this.stride)) - height; i += this.stride) {
 
                 //col
-                for (int j = 0; j < (rgbInputMatrix.getSize(2) - ((rgbInputMatrix.getSize(2) % this.stride) * this.stride)) - height - width; j += this.stride) {
+                for (int j = 0; j < (rgbInputMatrix.getSize(2) - ((rgbInputMatrix.getSize(2) % this.stride) * this.stride)) - width; j += this.stride) {
 
                     List<List<Double>> pieceInputMatrix = takePieceInputMatrix(rgbInputMatrix, width, height, i, j);
                     Matrix m = kernel.get(k).dot(new MatrixClass(pieceInputMatrix));
