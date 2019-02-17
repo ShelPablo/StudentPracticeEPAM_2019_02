@@ -1,6 +1,7 @@
 package layer;
 
 import imageprocessor.ImageProcessorClass;
+import layer.kernels.KernelsReader;
 import matrix.Matrix;
 
 import java.util.*;
@@ -18,7 +19,7 @@ public class AlexConvolutionLayer extends ConvolutionLayer {
         List<Matrix> output = new ArrayList<>();
 
         for (List<Matrix> kernel: getKernels()){
-            Matrix result = convolute3d(getInput(), kernel);
+            Matrix result = convolute3d(getInput());
             output.add(result);
         }
 
