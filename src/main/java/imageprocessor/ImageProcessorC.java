@@ -48,7 +48,5 @@ public class ImageProcessorC extends ImageProcessor{
         }
         Graphics graphics = jFrame.getGraphics();
         graphics.drawImage(_image, 0,0,w,h,null);
-
-
     }
 }
