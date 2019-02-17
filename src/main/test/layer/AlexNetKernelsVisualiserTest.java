@@ -1,12 +1,12 @@
 package layer;
 
+import layer.kernels.AlexNetKernelsVisualiser;
+import layer.kernels.KernelsReader;
 import matrix.Matrix;
-import matrix.MatrixClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class AlexNetKernelsVisualiserTest {
     @Test

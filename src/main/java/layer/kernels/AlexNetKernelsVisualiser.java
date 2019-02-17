@@ -1,4 +1,4 @@
-package layer;
+package layer.kernels;
 
 import imageprocessor.ImageProcessor;
 import imageprocessor.ImageProcessorClass;

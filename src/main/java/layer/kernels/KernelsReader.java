@@ -1,4 +1,4 @@
-package layer;
+package layer.kernels;
 
 import matrix.Matrix;
 import matrix.MatrixClass;

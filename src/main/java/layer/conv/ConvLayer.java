@@ -1,5 +1,6 @@
-package layer;
+package layer.conv;
 
+import layer.Layer;
 import matrix.Matrix;
 
 import java.util.List;

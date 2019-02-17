@@ -1,6 +1,6 @@
 package matrix;
 
-import layer.AlexNetKernelsVisualiser;
+import layer.kernels.AlexNetKernelsVisualiser;
 import org.junit.Assert;
 import org.junit.Test;
 

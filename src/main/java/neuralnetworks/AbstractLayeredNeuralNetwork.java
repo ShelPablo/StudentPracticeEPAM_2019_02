@@ -5,12 +5,15 @@ import matrix.Matrix;
 
 import java.util.Deque;
 import java.util.List;
+import java.util.function.Function;
 
-public abstract class AbstractLayeredNeuralNetwork {
+public abstract class AbstractLayeredNeuralNetwork implements LayeredNeuralNetwork {
+
+    Function<List<Matrix>, List<Matrix>> apply;
 
     private Deque<Layer> layers;
 
-    public AbstractLayeredNeuralNetwork addLayer(Layer newLayer) {
+    public LayeredNeuralNetwork addLayer(Layer newLayer) {
         newLayer.setInput(layers.getLast().getOutput());
         layers.add(newLayer);
         return this;
