@@ -1,6 +1,7 @@
 package layer;
 
 import imageprocessor.ImageProcessorClass;
+import layer.conv.AlexConv1Layer;
 import matrix.Matrix;
 import org.junit.Test;
 
@@ -13,8 +14,8 @@ public class AlexConvolutionLayerTest {
         ImageProcessorClass imageProcessorClass = new ImageProcessorClass();
         List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/rosy.jpg");
 
-        AlexConvolutionLayer acl = new AlexConvolutionLayer(input);
-        acl.apply();
+        Layer acl = new AlexConv1Layer();
+        acl.apply(input);
 
         List<Matrix> output = acl.getOutput();
         System.out.println(output.size());
