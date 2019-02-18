@@ -16,11 +16,13 @@ public class AlexConv1Layer extends ConvolutionLayer {
     @Override
     public List<Matrix> apply(List<Matrix> input){
 
+        super.setInput(input);
+
         List<Matrix> output = new ArrayList<>();
 
         for (List<Matrix> kernel: getKernels()){
 
-            Matrix result = convolute3d(this.getInput(), kernel);
+            Matrix result = super.convolute3d(this.getInput(), kernel);
             output.add(result);
         }
 

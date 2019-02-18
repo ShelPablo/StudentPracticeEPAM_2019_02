@@ -74,15 +74,9 @@ public class ImageProcessorClass extends ImageProcessor {
                 g.drawImage(bufImg, 0, 0, null);
             }
         };
-
         frame.add(panel);
         frame.setVisible(true);
     }
-
-
-
-
-
 }
 
 class ImageFrame extends JFrame

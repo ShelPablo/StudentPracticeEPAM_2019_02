@@ -22,7 +22,7 @@ public class ImageLoaderClass extends JComponent implements ImageLoader
     {
         try
         {
-            image = ImageIO.read(new File("src/main/images/"+filename));
+            image = ImageIO.read(new File(filename));
             return image;
         }
         catch(IOException ex)
@@ -38,7 +38,7 @@ public class ImageLoaderClass extends JComponent implements ImageLoader
 
         try
         {
-            image = ImageIO.read(new File("src/main/images/"+filename));
+            image = ImageIO.read(new File(filename));
         }
         catch(IOException ex)
         {
