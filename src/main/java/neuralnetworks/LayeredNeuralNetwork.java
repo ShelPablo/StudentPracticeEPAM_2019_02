@@ -1,14 +1,19 @@
 package neuralnetworks;
 
 import layer.Layer;
+import matrix.Matrix;
+
+import java.util.List;
 
 public interface LayeredNeuralNetwork {
 
     LayeredNeuralNetwork addLayer(Layer newLayer);
 
-    void train(String pathToTrainingSet);
+    List<Double> apply(List<Matrix> matrixFromRGBImage);
 
-    void test(String pathToTestSet);
+    //void train(String pathToTrainingSet);
+
+    //void test(String pathToTestSet);
 
 
 }

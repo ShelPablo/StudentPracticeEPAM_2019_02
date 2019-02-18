@@ -31,9 +31,9 @@ public class Application {
                 .addLayer(pool1)
                 .addLayer(fully);
 
-        cnn.train("folderTrain");
+       // cnn.train("folderTrain");
 
-        cnn.test("folderTest");
+       // cnn.test("folderTest");
 
     }
 }
