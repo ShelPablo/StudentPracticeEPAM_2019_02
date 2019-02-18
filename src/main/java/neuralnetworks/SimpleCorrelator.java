@@ -16,7 +16,9 @@ public class SimpleCorrelator {
 
     List<List<Matrix>> coefficientsSet;
 
-    Matrix weights;
+    Matrix weights; // fromString([ 0 0 0 0 0 0 ...
+                                // 0 0.1 0.1 0.1 ...
+                                // 0 0.1 0.2 0.2 ...
 
     private int trainingSetVolume = 0;
 
@@ -58,6 +60,8 @@ public class SimpleCorrelator {
     private void xWeightCoefs() {
         //multiply coefs by weights, that are 0 near the border
     }
+
+
 
 
 
