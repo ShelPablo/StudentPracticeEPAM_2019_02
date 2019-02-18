@@ -214,5 +214,20 @@ public class MatrixClassTest {
 
     }
 
+    @Test
+    public void fromString(){
+        List<List<Double>> _matrix1 = new ArrayList<>();
+        _matrix1.add(new ArrayList<>(Arrays.asList(1., 2., 3., 4.)));
+        _matrix1.add(new ArrayList<>(Arrays.asList(5., 6., 7., 8.)));
+
+        Matrix expected_matrix = new MatrixClass(_matrix1);
+        String string = "1.,2.,3.,4.;'\n'5.,6.,7.,8.";
+
+        Matrix actual_matrix = expected_matrix.fromString(string);
+
+        assertEquals(expected_matrix.getMatrix(),actual_matrix.getMatrix());
+
+    }
+
 
 }

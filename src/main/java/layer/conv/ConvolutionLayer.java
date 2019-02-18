@@ -1,5 +1,6 @@
-package layer;
+package layer.conv;
 
+import layer.Layer;
 import matrix.Matrix;
 import matrix.MatrixClass;
 
@@ -33,6 +34,7 @@ public abstract class ConvolutionLayer implements Layer {
     public void setKernels(List<List<Matrix>> kernels) {
         this.kernels = kernels;
     }
+
     @Override
     public Layer setInput(List<Matrix> input) {
         this.input = input;

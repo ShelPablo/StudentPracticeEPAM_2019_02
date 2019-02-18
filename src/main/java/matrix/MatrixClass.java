@@ -66,7 +66,6 @@ public class MatrixClass implements Matrix {
     }
 
     /*element-by-element multiplication*/
-<<<<<<< HEAD
     public Matrix dot(Matrix matrix) {
 
         if (getSize(1) != matrix.getSize(1) &&
@@ -74,16 +73,6 @@ public class MatrixClass implements Matrix {
             throw new RuntimeException("Matrix sizes are different");
         }
 
-=======
-   public Matrix dot(Matrix matrix) {
-
-        if (getSize(1) != matrix.getSize(1) &&
-                getSize(2) != matrix.getSize(2)) {
-            throw new IllegalArgumentException("Matrices dimensions must be equal");
-        }
-
-
->>>>>>> e4a47d4c097699924763e8f74e6e06c96d769afc
         List<List<Double>> hadamardMatrix = new ArrayList<List<Double>>();
 
         for (int i = 0; i < getSize(1); i++) {
@@ -191,5 +180,25 @@ public class MatrixClass implements Matrix {
     @Override
     public int hashCode() {
         return Objects.hash(matrix);
+    }
+
+    @Override
+    public Matrix fromString(String string){
+
+        List<List<Double>> matrixFromString = new ArrayList<>();
+
+        String[] stringMatrix = string.split(";'\n'");
+        for (String s: stringMatrix) {
+            String[] rowStringMatrix = s.split(",");
+            List<Double> rowFromString = new ArrayList<>();
+            for (String _s: rowStringMatrix){
+
+                double el = Double.parseDouble(_s);
+                rowFromString.add(el);
+            }
+            matrixFromString.add(rowFromString);
+        }
+
+        return new MatrixClass(matrixFromString);
     }
 }

@@ -38,6 +38,10 @@ public interface Matrix {
 
 
     Matrix subMatrix(int rowIdx, int colIdx, int size1, int size2);
+
+
+    //Matrix from string
+    Matrix fromString(String string);
 }
 
 

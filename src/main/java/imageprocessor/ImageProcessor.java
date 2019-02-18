@@ -10,12 +10,8 @@ import java.util.List;
 
 public abstract class ImageProcessor {
 
-<<<<<<< HEAD
 
-    private ImageLoader imageLoader;
-=======
     private ImageLoader imageLoader = new ImageLoaderClass();
->>>>>>> e4a47d4c097699924763e8f74e6e06c96d769afc
 
     private List<Matrix> image;
 
@@ -27,11 +23,6 @@ public abstract class ImageProcessor {
 
         return image = imageLoader.loadImageAsMatrix(filename);
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e4a47d4c097699924763e8f74e6e06c96d769afc
 
     public abstract void showImage();
 
