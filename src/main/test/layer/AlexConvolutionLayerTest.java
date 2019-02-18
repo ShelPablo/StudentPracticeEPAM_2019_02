@@ -22,7 +22,7 @@ public class AlexConvolutionLayerTest {
         System.out.println(output.get(0).getSize(1));
 
         // Show the result of the convolution with the first filter (kernel)
-        acl.showImageAfter3dConvolution(0);
+        new ImageProcessorClass().showImageAfter3dConvolution(acl.getOutput(), 0);
         Thread.sleep(15000);
     }
 }
