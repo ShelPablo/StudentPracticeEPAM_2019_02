@@ -10,7 +10,7 @@ public class Simple3dConvLayer extends ConvLayer implements Layer {
     }
 
     @Override
-    public List<Matrix> setInput(List<Matrix> input) {
+    public Layer setInput(List<Matrix> input) {
         return null;
     }
 

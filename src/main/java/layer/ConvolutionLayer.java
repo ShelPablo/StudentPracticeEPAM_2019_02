@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ConvolutionLayer {
+public abstract class ConvolutionLayer implements Layer {
 
     private List<List<Matrix>> kernels;
     private List<Matrix> input;
@@ -33,9 +33,10 @@ public abstract class ConvolutionLayer {
     public void setKernels(List<List<Matrix>> kernels) {
         this.kernels = kernels;
     }
-
-    public void setInput(List<Matrix> input) {
+    @Override
+    public Layer setInput(List<Matrix> input) {
         this.input = input;
+        return this;
     }
 
     public void setOutput(List<Matrix> output) {
@@ -110,33 +111,28 @@ public abstract class ConvolutionLayer {
     }
 
     // 3d convolution of kernel with input
-    protected Matrix convolute3d(List<Matrix> input) {
+    protected Matrix convolute3d(List<Matrix> input, List<Matrix> kernel) {
         if (kernels.get(0).size() == input.size()) {
-            Matrix result = new MatrixClass(43333333, 33333335);
-            for (List<Matrix> kernel : kernels) {
+            int resultSize1 = (input.get(0).getSize(1) - kernels.get(0).get(0).getSize(1) + 1) / stride;
+            int resultSize2 = (input.get(0).getSize(2) - kernels.get(0).get(0).getSize(2) + 1) / stride;
 
-                int rows = (input.get(0).getSize(1) - kernel.get(0).getSize(1)) / stride + 1;
-                int columns = (input.get(0).getSize(2) - kernel.get(0).getSize(2)) / stride + 1;
+            Matrix result = new MatrixClass(resultSize1, resultSize2);
 
-                Matrix redConvolution = convolution(input.get(0), kernel.get(0));
-                Matrix greenConvolution = convolution(input.get(1), kernel.get(1));
-                Matrix blueConvolution = convolution(input.get(2), kernel.get(2));
-
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < columns; j++) {
-                        double sumOfValues = redConvolution.get(i, j) + greenConvolution.get(i, j)
-                                + blueConvolution.get(i, j);
-                        //result.get(i).set(j, ReLU(sumOfValues));
+            for (int iRow = 0; iRow < resultSize1; iRow++) {
+                for (int iCol = 0; iCol < resultSize2; iCol++) {
+                    double conv = 0;
+                    for (int i = 0; i < kernel.size(); i++) {
+                        conv += kernel.get(i).convolute(
+                                input.get(i).subMatrix(iRow * stride, iCol * stride,
+                                        kernel.get(i).getSize(1), kernel.get(i).getSize(2)));
                     }
+                    result.set(iRow, iCol, ReLU(conv));
                 }
-
             }
-            return result;
-        }
-        else throw new IllegalArgumentException("The 3-rd dimensions of kernel and input must be equal");
-    }
 
-    public abstract void apply();
+            return result;
+        } else throw new IllegalArgumentException("The 3-rd dimensions of kernel and input must be equal");
+    }
 
     // Activation function
     private double ReLU(double value) {

@@ -11,7 +11,7 @@ public class MaxPoolLayer implements Layer {
 
 
     @Override
-    public List<Matrix> setInput(List<Matrix> input) {
+    public Layer setInput(List<Matrix> input) {
         return null;
     }
 
