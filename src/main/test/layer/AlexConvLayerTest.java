@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class AlexConvolutionLayerTest {
+public class AlexConvLayerTest {
 
     @Test
     public void apply() throws InterruptedException {

@@ -1,13 +1,11 @@
 package layer.conv;
 
-import imageprocessor.ImageProcessorClass;
-import layer.ConvolutionLayer;
 import layer.kernels.KernelsReader;
 import matrix.Matrix;
 
 import java.util.*;
 
-public class AlexConv1Layer extends ConvolutionLayer {
+public class AlexConv1Layer extends ConvLayer {
 
     public AlexConv1Layer(){
         setKernels(KernelsReader.readKernelsFromFile("src/main/resources/AlexK.txt"));

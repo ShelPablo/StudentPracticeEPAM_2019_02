@@ -15,6 +15,11 @@ public class Simple3dConvLayer extends ConvLayer implements Layer {
     }
 
     @Override
+    public List<Matrix> apply(List<Matrix> input) {
+        return null;
+    }
+
+    @Override
     public List<Matrix> getOutput() {
         return null;
     }
