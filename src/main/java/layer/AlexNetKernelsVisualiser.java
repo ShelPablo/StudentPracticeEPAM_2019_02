@@ -94,25 +94,6 @@ public class AlexNetKernelsVisualiser {
         List<List<Double>> normalizedMatrix = new ArrayList<>();
         double min = getMin(matrix);
         double max = getMax(matrix);
-        double move = 0;
-        //if (min < 0)
-       // {
-       //     move = Math.abs(min);
-        //    min += move;
-        //    max += move;
-       // }
-        double scaleCoef = 0.;
-        if (Math.abs(min) > Math.abs(max)) {
-            double buf = 0;
-            buf = min;
-            max = min;
-            min = buf;
-            scaleCoef = 56.25 / Math.abs(min);
-        }
-        else {
-           scaleCoef = 56.25 / (max);
-        }
-        //max += min;
         for (int i = 0; i < matrix.getSize(1); i++) {
             normalizedMatrix.add(new ArrayList<Double>());
             for (int j = 0; j < matrix.getSize(2); j++)
