@@ -1,6 +1,5 @@
 package layer;
 
-import imageprocessor.ImageProcessorClass;
 import matrix.Matrix;
 
 import java.util.*;
@@ -24,16 +23,4 @@ public class AlexConvolutionLayer extends ConvolutionLayer {
 
         setOutput(output);
     }
-
-    /*public static void main(String[] args){
-        ImageProcessorClass imageProcessorClass = new ImageProcessorClass();
-        List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/2.jpg");
-
-        AlexConvolutionLayer acl = new AlexConvolutionLayer(input);
-        acl.apply();
-
-        List<Matrix> output = acl.getOutput();
-        System.out.println(output.size());
-        System.out.println(output.get(0).getSize(1));
-    }*/
 }
