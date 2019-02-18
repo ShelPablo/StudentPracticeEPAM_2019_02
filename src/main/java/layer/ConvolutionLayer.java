@@ -3,9 +3,6 @@ package layer;
 import matrix.Matrix;
 import matrix.MatrixClass;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -145,37 +142,6 @@ public abstract class ConvolutionLayer{
     }
 
     public abstract void apply();
-
-    // Shows the result of convolution with a specific filter
-    public void showImageAfter3dConvolution(int indexOfMatrix) {
-
-        int _height = output.get(indexOfMatrix).getSize(1);
-        int _width = output.get(indexOfMatrix).getSize(2);
-
-        BufferedImage bufImg = new BufferedImage(_width, _height, BufferedImage.TYPE_INT_RGB);
-        for (int i = 0; i < _height; i++){
-            for (int j = 0; j < _width; j++){
-                Double value = output.get(indexOfMatrix).get(i, j);
-                Color color = new Color(value.intValue(), value.intValue(), value.intValue());
-                bufImg.setRGB(j, i, color.getRGB());
-            }
-        }
-
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(_width, _height);
-
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(bufImg, 0, 0, null);
-            }
-        };
-
-        frame.add(panel);
-        frame.setVisible(true);
-    }
 
     // Activation function
     private double ReLU(double value){
