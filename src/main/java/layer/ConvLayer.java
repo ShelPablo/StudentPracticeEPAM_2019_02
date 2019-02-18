@@ -9,7 +9,7 @@ public abstract class ConvLayer implements Layer {
 
     private List<List<Matrix>> kernels;
     private List<Matrix> input;
-    private List<List<Matrix>> output;
+    private List<List<Matrix>> output = new ArrayList<>();
     private int stride;
 
 
@@ -37,13 +37,16 @@ public abstract class ConvLayer implements Layer {
         for (int s = 0; s<kernels.size();s++){
 
             List<Matrix> rowOutput = new ArrayList<>();
-            List<List<Double>> convMatrix = new ArrayList<>();
+            List<List<Double>> convMatrix0 = new ArrayList<>();
+            List<List<Double>> convMatrix1 = new ArrayList<>();
+            List<List<Double>> convMatrix2 = new ArrayList<>();
 
             int i = 0;
             while (i<input.get(0).getSize(1)-kernels.get(s).get(0).getSize(1)+1){
 
-                List<Double> rowConvMatrix = new ArrayList<>();
-
+                List<Double> rowConvMatrix0 = new ArrayList<>();
+                List<Double> rowConvMatrix1 = new ArrayList<>();
+                List<Double> rowConvMatrix2 = new ArrayList<>();
 
                 int j = 0;
                 while (j<input.get(0).getSize(2)-kernels.get(s).get(0).getSize(2)+1){
@@ -83,21 +86,34 @@ public abstract class ConvLayer implements Layer {
                     m1.dot(kernels.get(s).get(1));
                     m2.dot(kernels.get(s).get(2));
 
-                    Double el = null;
+                    double el0 = 0.0;
+                    double el1 = 0.0;
+                    double el2 = 0.0;
+
                     for (int x = 0; x < m0.getSize(1); x++) {
                         for (int y = 0; y < m0.getSize(2); y++) {
-                            el = m0.get(x, y) + m1.get(x, y) + m2.get(x, y);
+                            el0 = el0 + m0.get(x, y);
+                            el1 = el1 + m1.get(x,y);
+                            el2 = el2 +  m2.get(x,y);
                         }
                     }
-                    rowConvMatrix.add(el);
+                    rowConvMatrix0.add(el0);
+                    rowConvMatrix1.add(el1);
+                    rowConvMatrix2.add(el2);
                     j+=stride;
                 }
-                convMatrix.add(rowConvMatrix);
+                convMatrix0.add(rowConvMatrix0);
+                convMatrix1.add(rowConvMatrix1);
+                convMatrix2.add(rowConvMatrix2);
+
                 i+=stride;
             }
-            rowOutput.add(new MatrixClass(convMatrix));
-            rowOutput.add(new MatrixClass(convMatrix));
-            rowOutput.add(new MatrixClass(convMatrix));
+            rowOutput.add(new MatrixClass(convMatrix0));
+            rowOutput.add(new MatrixClass(convMatrix1));
+            rowOutput.add(new MatrixClass(convMatrix2));
+
+           // здесь где то ошибка
+            output.add(rowOutput);
         }
         return output;
     }
