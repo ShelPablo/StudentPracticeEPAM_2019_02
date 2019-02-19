@@ -23,6 +23,13 @@ public abstract class ConvLayer implements Layer {
         return kernels;
     }
 
+    @Override
+    public Layer setInput(List<Matrix> input) {
+        this.input.clear();
+        this.input.addAll(input);
+        return this;
+    }
+
     public List<Matrix> getInput() {
         return input;
     }
@@ -33,11 +40,6 @@ public abstract class ConvLayer implements Layer {
 
     public void setKernels(List<List<Matrix>> kernels) {
         this.kernels = kernels;
-    }
-    @Override
-    public Layer setInput(List<Matrix> input) {
-        this.input = input;
-        return this;
     }
 
     public void setOutput(List<Matrix> output) {
