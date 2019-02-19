@@ -1,5 +1,7 @@
 package neuralnetworks;
 
+import imageprocessor.ImageProcessor;
+import imageprocessor.ImageProcessorClass;
 import layer.Layer;
 import layer.conv.AlexConv1Layer;
 import layer.conv.Simple3dConvLayer;
@@ -8,7 +10,11 @@ import layer.fully.FullyConnectedLayerBuilder;
 import layer.pool.MaxPoolLayer;
 import matrix.Matrix;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SimpleCorrelator {
 
@@ -17,8 +23,8 @@ public class SimpleCorrelator {
     List<List<Matrix>> coefficientsSet;
 
     Matrix weights; // fromString([ 0 0 0 0 0 0 ...
-                                // 0 0.1 0.1 0.1 ...
-                                // 0 0.1 0.2 0.2 ...
+    // 0 0.1 0.1 0.1 ...
+    // 0 0.1 0.2 0.2 ...
 
     private int trainingSetVolume = 0;
 
@@ -49,20 +55,37 @@ public class SimpleCorrelator {
 
 
     public void trainFinalLayer() {
-        //foreach Group
-        //  foreach image in TrainingSet
-        //      trainCoefSetForGroup
-        //xWeightCoefs
-        //finalLayer.setCoefs(coefficients)
-        //finalLayer.uploadCoefs
+
+        File folder = new File("src/main/resources/TrainingSet");
+
+        HashMap map = new HashMap();
+        map.put("rub50", 0);
+        map.put("rub100", 1);
+        map.put("rub200", 2);
+        map.put("rub500", 3);
+        map.put("rub1000", 4);
+        map.put("rub5000", 5);
+
+        ImageProcessor imageProcessor = new ImageProcessorClass();
+
+        for (File group : folder.listFiles()) {
+            String groupName = group.getName();
+            for (File image : group.listFiles()) {
+
+                trainCoefSetForGroup(imageProcessor.loadImage(image.getPath()), (int) map.get(groupName));
+            }
+        }
+
+        xWeightCoefs();
+
+        this.finalLayer.uploadCeffSetToFile("src/main/resources/CoeffSet.txt");
+        this.finalLayer.downloadCeffSetFromFile("src/main/resources/CoeffSet.txt");
+
     }
 
     private void xWeightCoefs() {
         //multiply coefs by weights, that are 0 near the border
     }
-
-
-
 
 
 }
