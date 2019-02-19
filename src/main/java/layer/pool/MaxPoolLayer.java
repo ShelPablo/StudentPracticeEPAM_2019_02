@@ -17,7 +17,14 @@ public class MaxPoolLayer implements Layer {
 
     @Override
     public Layer setInput(List<Matrix> input) {
-        this.input.clear();
+        if (this.input != null)
+        {
+            this.input.clear();
+        }
+        else
+        {
+            this.input = new ArrayList<>();
+        }
         this.input.addAll(input);
         return this;
     }

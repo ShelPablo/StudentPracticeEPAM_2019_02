@@ -51,27 +51,27 @@ public class ImageProcessorClass extends ImageProcessor {
 
     public void showImageAfter3dConvolution(List<Matrix> output, int indexOfMatrix) {
 
-        int _height = output.get(indexOfMatrix).getSize(1);
-        int _width = output.get(indexOfMatrix).getSize(2);
+        int _height = output.get(indexOfMatrix).getSize(2);
+        int _width = output.get(indexOfMatrix).getSize(1);
 
         BufferedImage bufImg = new BufferedImage(_width, _height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < _height; i++){
             for (int j = 0; j < _width; j++){
-                Double value = output.get(indexOfMatrix).get(i, j);
+                Double value = output.get(indexOfMatrix).get(j, i);
                 Color color = new Color(value.intValue(), value.intValue(), value.intValue());
                 bufImg.setRGB(j, i, color.getRGB());
             }
         }
-
+        Image img = bufImg.getScaledInstance(_width*5, _height*5, Image.SCALE_SMOOTH);
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(_width, _height);
+        frame.setSize(_width*5, _height*5);
 
         JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(bufImg, 0, 0, null);
+                g.drawImage(img, 0, 0, null);
             }
         };
         frame.add(panel);
