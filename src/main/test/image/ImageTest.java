@@ -1,3 +1,5 @@
+package image;
+
 import imageprocessor.ImageLoader;
 import imageprocessor.ImageLoaderClass;
 import imageprocessor.ImageProcessor;
