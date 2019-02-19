@@ -7,11 +7,7 @@ public class ImageTest {
 
     @Test
     public void showImage() throws InterruptedException {
-        ImageLoader imageLoader = new ImageLoaderClass();
-        ImageProcessor imageProcessor = new ImageProcessorClass(imageLoader);
-        imageProcessor.loadImage("1.jpg");
-        imageProcessor.showImage();
-        Thread.sleep(1000);
+
     }
 
 }

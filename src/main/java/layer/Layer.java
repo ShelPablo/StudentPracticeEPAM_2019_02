@@ -4,6 +4,14 @@ import matrix.Matrix;
 
 import java.util.List;
 
-public interface    Layer {
-    void apply();
+public interface Layer {
+
+    Layer setInput(List<Matrix> input);
+
+    List<Matrix> getOutput();
+
+    List<Matrix> apply(List<Matrix> input);
+
+//    List<Matrix> train(List<Matrix> input, List<Matrix> trueOutput);
+
 }
