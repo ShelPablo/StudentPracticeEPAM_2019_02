@@ -1,5 +1,17 @@
 package layer;
 
-public interface    Layer {
-    void apply();
+import matrix.Matrix;
+
+import java.util.List;
+
+public interface Layer {
+
+    Layer setInput(List<Matrix> input);
+
+    List<Matrix> getOutput();
+
+    List<Matrix> apply(List<Matrix> input);
+
+//    List<Matrix> train(List<Matrix> input, List<Matrix> trueOutput);
+
 }
