@@ -27,16 +27,4 @@ public class AlexConv1Layer extends ConvLayer {
         setOutput(output);
         return output;
     }
-
-    /*public static void main(String[] args){
-        ImageProcessorClass imageProcessorClass = new ImageProcessorClass();
-        List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/2.jpg");
-
-        AlexConv1Layer acl = new AlexConv1Layer(input);
-        acl.apply();
-
-        List<Matrix> output = acl.getOutput();
-        System.out.println(output.size());
-        System.out.println(output.get(0).getSize(1));
-    }*/
 }
