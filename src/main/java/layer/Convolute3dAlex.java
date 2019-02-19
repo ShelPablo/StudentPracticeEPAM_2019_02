@@ -1,5 +1,10 @@
 package layer;
 
+import matrix.Matrix;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Convolute3dAlex extends ConvLayerClass{
 
 
@@ -11,8 +16,13 @@ public class Convolute3dAlex extends ConvLayerClass{
     @Override
     public void apply(){
         KernelsReader kernelsReader = new KernelsReader();
-        super._kernel = kernelsReader.readKernelsFromFile("./src/main/resourses/AlexK.txt");
-        super._output = convolute(_input);
+        super.kernel = kernelsReader.readKernelsFromFile("./src/main/resourses/AlexK.txt");
+
+        List<Matrix> result = new ArrayList<>();
+        for(List<Matrix> value: kernel){
+            result.add(convolute3d(input,value).get(0));
+        }
+        super.output =result;
     }
 
 }
