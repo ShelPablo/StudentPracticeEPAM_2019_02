@@ -20,9 +20,10 @@ public class AlexConvLayerTest {
         List<Matrix> output = acl.getOutput();
         System.out.println(output.size());
         System.out.println(output.get(0).getSize(1));
+        System.out.println(output.get(0).getSize(2));
 
         // Show the result of the convolution with the first filter (kernel)
         new ImageProcessorClass().showImageAfter3dConvolution(acl.getOutput(), 0);
-        Thread.sleep(1000);
+        Thread.sleep(15000);
     }
 }

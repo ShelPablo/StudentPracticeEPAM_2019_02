@@ -18,11 +18,15 @@ public class KernelsReader {
         ArrayList<Matrix> kernel = new ArrayList<>();
 
 
-
-
+        URL url = ClassLoader.getSystemResource(filename);
 
         try{
-            File file = new File(filename);
+            File file = null;
+            try {
+                file = new File(url.toURI());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
 

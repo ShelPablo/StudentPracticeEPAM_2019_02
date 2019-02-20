@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class ConvLayer implements Layer {
 
     private List<List<Matrix>> kernels;
-    private List<Matrix> input;
+    private List<Matrix> input = new ArrayList<>();
     private List<Matrix> output;
     private int stride;
 
