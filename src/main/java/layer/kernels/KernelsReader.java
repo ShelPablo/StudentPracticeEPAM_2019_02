@@ -4,6 +4,8 @@ import matrix.Matrix;
 import matrix.MatrixClass;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +16,10 @@ public class KernelsReader {
 
         List<List<Matrix>> kernels = new ArrayList<>();
         ArrayList<Matrix> kernel = new ArrayList<>();
+
+
+
+
 
         try{
             File file = new File(filename);

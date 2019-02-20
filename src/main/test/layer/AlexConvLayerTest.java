@@ -12,7 +12,7 @@ public class AlexConvLayerTest {
     @Test
     public void apply() throws InterruptedException {
         ImageProcessorClass imageProcessorClass = new ImageProcessorClass();
-        List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/TrainingSet/rub50/1.jpg");
+        List<Matrix> input = imageProcessorClass.loadImage("TrainingSet/rub50/1.jpg");
 
         Layer acl = new AlexConv1Layer();
         acl.apply(input);
