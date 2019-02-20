@@ -2,15 +2,21 @@ package imageprocessor;
 
 import matrix.Matrix;
 
+import java.util.List;
+
 public abstract class ImageProcessor {
 
-    private ImageLoader imageLoader;
+    private ImageLoader imageLoader = new ImageLoaderClass();
 
-    private Matrix image;
+    private List<Matrix> image;
 
-    public Matrix loadImage(String filename) {
+    public List<Matrix> getImage(){
+        return image;
+    }
+
+    public List<Matrix> loadImage(String filename) {
         return image = imageLoader.loadImageAsMatrix(filename);
-    };
+    }
 
     public abstract void showImage();
 
