@@ -28,8 +28,14 @@ public class FinalLayer {
 
     }
 
+/*    public Double calculateSquaredDeviationForInput(int groupIdx, List<Matrix> input) {
+        // (input - coefficients(groupIdx))^2
+        return null;
+    }
 
-
-
-
+    public Double calculateAbsDeviationForInput(int groupIdx, List<Matrix> input) {
+        // abs(input - coefficients(groupIdx))
+        return null;
+    }
+*/
 }

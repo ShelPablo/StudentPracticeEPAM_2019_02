@@ -21,5 +21,4 @@ public class AlexNetKernelsVisualiserTest {
         Thread.sleep(2000);
 
     }
-
 }

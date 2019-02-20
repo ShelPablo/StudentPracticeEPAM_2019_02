@@ -8,6 +8,7 @@ import layer.fully.FullyConnectedLayerBuilder;
 import layer.pool.MaxPoolLayer;
 import matrix.Matrix;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleCorrelator {
@@ -15,6 +16,8 @@ public class SimpleCorrelator {
     List<String> fileNames; // "rub50", "rub100", "rub200"
 
     List<List<Matrix>> coefficientsSet;
+
+    List<Double> thresholds;
 
     Matrix weights; // fromString([ 0 0 0 0 0 0 ...
                                 // 0 0.1 0.1 0.1 ...
@@ -31,10 +34,12 @@ public class SimpleCorrelator {
     //6x1
 
 
-    public List<Double> apply(List<Matrix> input) {
+    public List<Boolean> apply(List<Matrix> input) {
         //conv1.apply
         //pool1.apply
         //finalLayer.apply
+
+        //getDecision
         return null;
     }
 
@@ -45,7 +50,54 @@ public class SimpleCorrelator {
         //(coef1 + coef2 +...)/N  (coef1 + coef2 +... +result)/(N+1) =>
         // coefficientsSet = coefficientsSet*N/(N+1) + result/(N+1)
         // N - trainingSetVolume
+
+
+
     }
+/*
+    public List<Double> getSTD() {
+        //foreach Group
+        //    sum = 0
+        //  foreach image in TrainingSet
+        //      sum += calculateSquaredDeviationForInput
+        //
+        //sqrt(sum/N)
+        return null;
+    }
+
+    public List<Double> getMaxDeviation() {
+        //foreach Group
+        //  max = 0
+        //  foreach image in TrainingSet
+        //      max ?= calculateSquaredDeviationForInput
+        //   addToList(max)
+        //return List<max>
+        return null;
+    }
+*/
+
+    private List<Boolean> getDecision(List<Double> correlationCoefficients) {
+        List<Boolean> decisions = new ArrayList<>();
+        for (int i = 0; i < this.thresholds.size(); i++) {
+            decisions.add(correlationCoefficients.get(i) > this.thresholds.get(i)  );
+        }
+
+        return decisions;
+    }
+
+
+    public List<Double> getThresholds() {
+        //foreach Group
+        //  foreach image in TrainingSet
+        //     trainOutput =  apply().get(groupIdx)
+        //     min ?= trainOutput
+        //  addToList(min)
+        //return List
+        return null;
+    }
+
+
+
 
 
     public void trainFinalLayer() {
