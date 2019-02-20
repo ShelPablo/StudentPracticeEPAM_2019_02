@@ -1,4 +1,4 @@
-package layer;
+package layer.kernels;
 
 import matrix.Matrix;
 import matrix.MatrixClass;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class KernelsReader {
 
-    public List<List<Matrix>> readKernelsFromFile(String filename){
+    public static List<List<Matrix>> readKernelsFromFile(String filename){
 
         List<List<Matrix>> kernels = new ArrayList<>();
         ArrayList<Matrix> kernel = new ArrayList<>();
