@@ -12,7 +12,7 @@ public class AlexConvLayerTest {
     @Test
     public void apply() throws InterruptedException {
         ImageProcessorClass imageProcessorClass = new ImageProcessorClass();
-        List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/rosy.jpg");
+        List<Matrix> input = imageProcessorClass.loadImage("src/main/resources/TrainingSet/rub50/1.jpg");
 
         Layer acl = new AlexConv1Layer();
         acl.apply(input);
@@ -23,6 +23,6 @@ public class AlexConvLayerTest {
 
         // Show the result of the convolution with the first filter (kernel)
         new ImageProcessorClass().showImageAfter3dConvolution(acl.getOutput(), 0);
-        Thread.sleep(15000);
+        Thread.sleep(1000);
     }
 }

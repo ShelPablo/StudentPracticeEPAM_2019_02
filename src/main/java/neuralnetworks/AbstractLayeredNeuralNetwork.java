@@ -13,6 +13,9 @@ public abstract class AbstractLayeredNeuralNetwork implements LayeredNeuralNetwo
 
     private Deque<Layer> layers;
 
+    private List<Double> output;
+
+
     public LayeredNeuralNetwork addLayer(Layer newLayer) {
         newLayer.setInput(layers.getLast().getOutput());
         layers.add(newLayer);
@@ -27,11 +30,11 @@ public abstract class AbstractLayeredNeuralNetwork implements LayeredNeuralNetwo
 
 
 
-    public List<Matrix>  apply(List<Matrix> input) {
-        layers.getFirst().setInput(input);
-        //layers.forEach(l->l.apply());
-        return layers.getLast().getOutput();
-    };
+//    public List<Matrix>  apply(List<Matrix> input) {
+//        layers.getFirst().setInput(input);
+//        //layers.forEach(l->l.apply());
+//        return layers.getLast().getOutput();
+//    };
 
 
 
