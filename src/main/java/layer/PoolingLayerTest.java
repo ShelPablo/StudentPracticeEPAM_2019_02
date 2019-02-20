@@ -1,5 +1,6 @@
 package layer;
 
+import layer.pool.MaxPoolLayer;
 import matrix.Matrix;
 import matrix.MatrixClass;
 import org.junit.Assert;
@@ -26,8 +27,8 @@ public class PoolingLayerTest {
         List<Matrix> matrices = new ArrayList<>();
         matrices.add(matrix1);
 
-        PoolingLayer poolingLayer = new PoolingLayer(2, 2, matrices);
-        poolingLayer.apply();
+        Layer poolingLayer = new MaxPoolLayer(2, 2);
+        poolingLayer.apply(matrices);
 
         List<Matrix> output = poolingLayer.getOutput();
 
