@@ -12,6 +12,8 @@ import matrix.Matrix;
 import matrix.MatrixClass;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +22,7 @@ public class SimpleCorrelator {
 
     public SimpleCorrelator() {
         coefficientsSet = new ArrayList<List<Matrix>>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 4; i++) {
             coefficientsSet.add(new ArrayList<Matrix>()
             );}
     }
@@ -135,13 +137,16 @@ public class SimpleCorrelator {
         return null;
     }
 
-
-
-
-
     public void trainFinalLayer() {
 
-        File folder = new File("src/main/resources/TrainingSet");
+
+        URL url = this.getClass().getClassLoader().getResource("TrainingSet");
+        File folder = null;
+        try {
+            folder = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            folder = new File(url.getPath());
+        }
 
         HashMap map = new HashMap();
         map.put("rub50", 0);
