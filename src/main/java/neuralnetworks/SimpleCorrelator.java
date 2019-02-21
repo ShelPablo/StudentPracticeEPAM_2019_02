@@ -32,9 +32,17 @@ public class SimpleCorrelator {
 
     List<Double> thresholds;
 
-    Matrix weights; // fromString([ 0 0 0 0 0 0 ...
-                                // 0 0.1 0.1 0.1 ...
-                                // 0 0.1 0.2 0.2 ...
+    String weightsStr = "0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00;'\n'" +
+            "0.00,0.25,0.37,0.50,0.62,0.73,0.80,0.82,0.82,0.80,0.73,0.62,0.50,0.37,0.25,0.00;'\n'" +
+            "0.00,0.28,0.62,0.70,0.80,0.86,0.93,0.95,0.95,0.93,0.86,0.80,0.70,0.62,0.28,0.00;'\n'" +
+            "0.00,0.29,0.63,0.72,0.80,0.88,0.96,1.00,1.00,0.96,0.88,0.80,0.72,0.63,0.29,0.00;'\n'" +
+            "0.00,0.29,0.63,0.72,0.80,0.88,0.96,1.00,1.00,0.96,0.88,0.80,0.72,0.63,0.29,0.00;'\n'" +
+            "0.00,0.28,0.62,0.70,0.80,0.86,0.93,0.95,0.95,0.93,0.86,0.80,0.70,0.62,0.28,0.00;'\n'" +
+            "0.00,0.25,0.37,0.50,0.62,0.73,0.80,0.82,0.82,0.80,0.73,0.62,0.50,0.37,0.25,0.00;'\n'" +
+            "0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00";
+    Matrix weights = MatrixClass.fromString(weightsStr);
+
+
 
     private int trainingSetVolume = 0;
 
@@ -175,17 +183,22 @@ public class SimpleCorrelator {
         return new MatrixClass(_matrix);
     }
 
-
-
-
-
-
     private void xWeightCoefs() {
         //multiply coefs by weights, that are 0 near the border
+
+        List<List<Matrix>> newCoefSet = null;
+
+        //for each group
+        for (int i = 0; i < coefficientsSet.size(); i++) {
+            List<Matrix> newCoefSetRow = null;
+
+            //for each filter
+            for (int j = 0; j < coefficientsSet.get(i).size(); j++) {
+                newCoefSetRow.add(coefficientsSet.get(i).get(j).dot(weights));
+            }
+            newCoefSet.add(newCoefSetRow);
+        }
+        coefficientsSet = newCoefSet;
     }
-
-
-
-
 
 }
