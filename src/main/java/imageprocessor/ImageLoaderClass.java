@@ -6,6 +6,8 @@ import matrix.MatrixClass;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,9 +38,17 @@ public class ImageLoaderClass extends JComponent implements ImageLoader
     @Override
     public List<Matrix> loadImageAsMatrix(String filename) {
 
+        URL url = this.getClass().getClassLoader().getResource(filename);
+        File file = null;
+        try {
+            file = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            file = new File(url.getPath());
+        }
+
         try
         {
-            image = ImageIO.read(new File(filename));
+            image = ImageIO.read(file);
         }
         catch(IOException ex)
         {

@@ -11,7 +11,11 @@ import java.util.List;
 public abstract class ConvLayer implements Layer {
 
     private List<List<Matrix>> kernels;
+<<<<<<< HEAD
     private List<Matrix> input;
+=======
+    private List<Matrix> input = new ArrayList<>();
+>>>>>>> upstream/Pavel
     private List<Matrix> output;
     private int stride;
 
@@ -36,6 +40,7 @@ public abstract class ConvLayer implements Layer {
     }
     @Override
     public Layer setInput(List<Matrix> input) {
+<<<<<<< HEAD
         this.input = input;
         return this;
     }
@@ -100,6 +105,85 @@ public abstract class ConvLayer implements Layer {
     // Convolution of each kernel with each input Matrix in List
     public List<Matrix> convolute(List<Matrix> input, List<Matrix> kernel) {
 
+=======
+        this.input.clear();
+        this.input.addAll(input);
+        return this;
+    }
+
+    public List<Matrix> getInput() {
+        return input;
+    }
+
+    public List<Matrix> getOutput() {
+        return output;
+    }
+
+    public void setKernels(List<List<Matrix>> kernels) {
+        this.kernels = kernels;
+    }
+
+    public void setOutput(List<Matrix> output) {
+        this.output = output;
+    }
+
+    private double getFilteredValue(Matrix input, int indexOfRow, int indexOfCol, Matrix kernel) {
+
+        double filteredValue = 0;
+
+        List<List<Double>> _partOfInputImage = new ArrayList<>();
+
+        for (int i = 0; i < kernel.getSize(1); i++) {
+            _partOfInputImage.add(new ArrayList<>(Collections.nCopies(kernel.getSize(2), 0.)));
+        }
+
+        for (int i = 0; i < kernel.getSize(1); ++i) {
+            for (int j = 0; j < kernel.getSize(2); ++j) {
+                _partOfInputImage.get(i).set(j, input.get(indexOfRow + i, indexOfCol + j));
+            }
+        }
+
+        Matrix partOfInputImage = new MatrixClass(_partOfInputImage);
+
+        Matrix result = partOfInputImage.dot(kernel);
+
+        for (int i = 0; i < result.getSize(1); ++i) {
+            for (int j = 0; j < result.getSize(2); ++j) {
+                filteredValue += result.get(i, j);
+            }
+        }
+
+        return filteredValue;
+    }
+
+    // Convolution of kernel with input Matrix
+    private Matrix convolution(Matrix input, Matrix kernel) {
+
+        List<List<Double>> result = new ArrayList<>();
+
+        int rows = (input.getSize(1) - kernel.getSize(1)) / stride + 1;
+        int columns = (input.getSize(2) - kernel.getSize(2)) / stride + 1;
+
+        for (int i = 0; i < rows; i++) {
+            result.add(new ArrayList<>(Collections.nCopies(columns, 0.)));
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int indexOfRow = i * stride;
+                int indexOfCol = j * stride;
+                double newValue = getFilteredValue(input, indexOfRow, indexOfCol, kernel);
+                result.get(i).set(j, newValue);
+            }
+        }
+
+        return new MatrixClass(result);
+    }
+
+    // Convolution of each kernel with each input Matrix in List
+    public List<Matrix> convolute(List<Matrix> input, List<Matrix> kernel) {
+
+>>>>>>> upstream/Pavel
         List<Matrix> result = new ArrayList<>();
 
         for (Matrix _kernel : kernel) {

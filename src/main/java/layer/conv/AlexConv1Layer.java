@@ -8,7 +8,7 @@ import java.util.*;
 public class AlexConv1Layer extends ConvLayer {
 
     public AlexConv1Layer(){
-        setKernels(KernelsReader.readKernelsFromFile("src/main/resources/AlexK.txt"));
+        setKernels(KernelsReader.readKernelsFromFile("AlexK.txt"));
         setStride(4);
     }
     @Override

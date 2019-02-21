@@ -182,8 +182,8 @@ public class MatrixClass implements Matrix {
         return Objects.hash(matrix);
     }
 
-    @Override
-    public Matrix fromString(String string){
+    //@Override
+    public static Matrix fromString(String string){
 
         List<List<Double>> matrixFromString = new ArrayList<>();
 
