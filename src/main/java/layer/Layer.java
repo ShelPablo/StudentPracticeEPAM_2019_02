@@ -12,4 +12,7 @@ public interface Layer {
     List<Matrix> getOutput();
 
     List<Matrix> apply(List<Matrix> input);
+
+//    List<Matrix> train(List<Matrix> input, List<Matrix> trueOutput);
+
 }

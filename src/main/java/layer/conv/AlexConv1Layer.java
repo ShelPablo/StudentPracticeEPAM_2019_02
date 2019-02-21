@@ -5,7 +5,7 @@ import matrix.Matrix;
 
 import java.util.*;
 
-public class AlexConv1Layer extends ConvolutionLayer {
+public class AlexConv1Layer extends ConvLayer {
 
     public AlexConv1Layer(){
         setKernels(KernelsReader.readKernelsFromFile("src/main/resources/AlexK.txt"));
