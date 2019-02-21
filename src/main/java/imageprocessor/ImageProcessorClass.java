@@ -58,6 +58,12 @@ public class ImageProcessorClass extends ImageProcessor {
         for (int i = 0; i < _height; i++){
             for (int j = 0; j < _width; j++){
                 Double value = output.get(indexOfMatrix).get(i, j);
+                if (value < 0){
+                    value=0.0;
+                }
+                if (value >255){
+                    value=255.0;
+                }
                 Color color = new Color(value.intValue(), value.intValue(), value.intValue());
                 bufImg.setRGB(j, i, color.getRGB());
             }
