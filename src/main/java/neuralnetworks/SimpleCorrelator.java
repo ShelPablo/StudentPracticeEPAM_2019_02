@@ -164,7 +164,8 @@ public class SimpleCorrelator {
             String groupName = group.getName();
             this.trainingSetVolume = 0;
             for (File image : group.listFiles()) {
-                String[] path = image.getPath().split("/");
+
+                String[] path = image.getPath().split(Character.toString(File.separatorChar));
                 String relativePath = path[path.length-3]+"/"+path[path.length-2]+"/"+path[path.length-1];
                 trainCoefSetForGroup(imageProcessor.loadImage(relativePath), (int) map.get(groupName));
             }
