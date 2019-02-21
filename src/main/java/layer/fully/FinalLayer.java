@@ -1,7 +1,6 @@
 package layer.fully;
 
 import matrix.Matrix;
-import matrix.MatrixClass;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -73,6 +72,7 @@ public class FinalLayer {
     }
 
     public void uploadCeffSetToFile(String filename) {
+
         Path path = Paths.get(filename);
 
         if (!Files.exists(path)){
@@ -109,11 +109,9 @@ public class FinalLayer {
         catch (IOException e){
             e.printStackTrace();
         }
-
     }
 
     public void downloadCeffSetFromFile(String filename) {
-
         try{
 
             File file = new File(filename);
@@ -154,6 +152,9 @@ public class FinalLayer {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 }

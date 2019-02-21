@@ -1,16 +1,13 @@
 package matrix;
 
-import layer.kernels.AlexNetKernelsVisualiser;
-import org.hamcrest.core.Is;
+import matrix.Matrix;
+import matrix.MatrixClass;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 
 public class MatrixClassTest {
 
@@ -27,7 +24,7 @@ public class MatrixClassTest {
         // Required output
         double actualValue = 8.;
 
-        assertEquals(expectedValue, actualValue, 0.);
+        Assert.assertEquals(expectedValue, actualValue, 0.);
     }
 
     @Test
@@ -43,7 +40,7 @@ public class MatrixClassTest {
         // Required output
         List<Double> actualRow = new ArrayList<>(Arrays.asList(1., 2., 6., 5.));
 
-        assertEquals(expectedRow, actualRow);
+        Assert.assertEquals(expectedRow, actualRow);
     }
 
     @Test
@@ -59,33 +56,7 @@ public class MatrixClassTest {
         // Required output
         List<Double> actualCol = new ArrayList<>(Arrays.asList(3., 8.));
 
-        assertEquals(expectedCol, actualCol);
-    }
-
-    @Test
-    public void getMin()
-    {
-        List<List<Double>> _matrix = new ArrayList<>();
-
-        _matrix.add(new ArrayList<>(Arrays.asList(3., 12., 6., 0.)));
-        _matrix.add(new ArrayList<>(Arrays.asList(4., 8., 7., 9.)));
-
-        Matrix matrix = new MatrixClass(_matrix);
-        AlexNetKernelsVisualiser shower = new AlexNetKernelsVisualiser();
-        assertEquals(0, (int)shower.getMin(matrix) );
-    }
-
-    @Test
-    public void getMax()
-    {
-        List<List<Double>> _matrix = new ArrayList<>();
-
-        _matrix.add(new ArrayList<>(Arrays.asList(3., 12., 6., 5.)));
-        _matrix.add(new ArrayList<>(Arrays.asList(4., 8., 7., 9.)));
-
-        Matrix matrix = new MatrixClass(_matrix);
-        AlexNetKernelsVisualiser shower = new AlexNetKernelsVisualiser();
-        assertEquals(12, (int)shower.getMax(matrix) );
+        Assert.assertEquals(expectedCol, actualCol);
     }
 
     @Test
@@ -99,6 +70,7 @@ public class MatrixClassTest {
 
         MatrixClass expectedMatrix = (MatrixClass)matrix1.t();
 
+        // Required output
         List<List<Double>> _matrix2 = new ArrayList<>();
 
         _matrix2.add(new ArrayList<>(Arrays.asList(1., 1.)));
@@ -107,7 +79,7 @@ public class MatrixClassTest {
 
         MatrixClass actualMatrix = new MatrixClass(_matrix2);
 
-        assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
+        Assert.assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
     }
 
     @Test
@@ -132,7 +104,7 @@ public class MatrixClassTest {
 
         MatrixClass actualMatrix = new MatrixClass(_actualMatrix);
 
-        assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
+        Assert.assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
     }
 
     @Test
@@ -156,25 +128,7 @@ public class MatrixClassTest {
 
         MatrixClass actualMatrix = new MatrixClass(_actualMatrix);
 
-        assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
-    }
-
-    @Test
-    public void convoluteTest() {
-        List<List<Double>> _matrix1 = new ArrayList<>();
-        List<List<Double>> _matrix2 = new ArrayList<>();
-
-        _matrix1.add(new ArrayList<>(Arrays.asList(1., 6.)));
-        _matrix1.add(new ArrayList<>(Arrays.asList(2., 2.)));
-        _matrix2.add(new ArrayList<>(Arrays.asList(0., 9.)));
-        _matrix2.add(new ArrayList<>(Arrays.asList(5., 6.)));
-
-        Matrix matrix1 = new MatrixClass(_matrix1);
-        Matrix matrix2 = new MatrixClass(_matrix2);
-        // Required output
-        Double expected = 76d;
-
-        assertEquals(matrix1.convolute(matrix2), expected);
+        Assert.assertEquals(expectedMatrix.getMatrix(), actualMatrix.getMatrix());
     }
 
     @Test
@@ -189,30 +143,6 @@ public class MatrixClassTest {
         // Required output
         int actualSize = 4;
 
-        assertEquals(expectedSize, actualSize);
+        Assert.assertEquals(expectedSize, actualSize);
     }
-
-    @Test
-    public void subMatrixTest() {
-
-        List<List<Double>> _matrix1 = new ArrayList<>();
-        _matrix1.add(new ArrayList<>(Arrays.asList(1., 2., 3., 4.)));
-        _matrix1.add(new ArrayList<>(Arrays.asList(5., 6., 7., 8.)));
-        _matrix1.add(new ArrayList<>(Arrays.asList(9., 10., 11., 12.)));
-        _matrix1.add(new ArrayList<>(Arrays.asList(13., 14., 15., 16.)));
-
-        Matrix matrix1 = new MatrixClass(_matrix1);
-
-        List<List<Double>> expected = new ArrayList<>();
-        expected.add(new ArrayList<>(Arrays.asList(7., 8.)));
-        expected.add(new ArrayList<>(Arrays.asList(11., 12.)));
-        expected.add(new ArrayList<>(Arrays.asList(15., 16.)));
-
-        Matrix matrix2 = new MatrixClass(expected);
-
-        assertThat(matrix1.subMatrix(1, 2, 3, 2), is(matrix2));
-
-    }
-
-
 }
