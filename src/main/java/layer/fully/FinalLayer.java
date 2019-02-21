@@ -1,6 +1,7 @@
 package layer.fully;
 
 import matrix.Matrix;
+import matrix.MatrixClass;
 
 import java.io.*;
 import java.nio.file.Files;
