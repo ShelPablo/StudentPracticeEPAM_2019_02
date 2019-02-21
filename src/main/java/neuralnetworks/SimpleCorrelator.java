@@ -51,9 +51,10 @@ public class SimpleCorrelator {
         //conv1.apply
         //pool1.apply
         //finalLayer.apply
+        return getDecision(finalLayer.apply(pool1.apply(conv1.apply(input))));
+
 
         //getDecision
-        return null;
     }
 
     //Group - recognition class (100rub, 200rub ...)
