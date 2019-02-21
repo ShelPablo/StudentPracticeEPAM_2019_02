@@ -1,5 +1,6 @@
 package matrix;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Matrix {
@@ -38,6 +39,26 @@ public interface Matrix {
 
 
     Matrix subMatrix(int rowIdx, int colIdx, int size1, int size2);
+
+    //Matrix from string
+    static Matrix fromString(String string){
+
+        List<List<Double>> matrixFromString = new ArrayList<>();
+
+        String[] stringMatrix = string.split(";'\n'");
+        for (String s: stringMatrix) {
+            String[] rowStringMatrix = s.split(",");
+            List<Double> rowFromString = new ArrayList<>();
+            for (String _s: rowStringMatrix){
+
+                double el = Double.parseDouble(_s);
+                rowFromString.add(el);
+            }
+            matrixFromString.add(rowFromString);
+        }
+
+        return new MatrixClass(matrixFromString);
+    }
 }
 
 
