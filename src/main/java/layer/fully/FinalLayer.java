@@ -8,10 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Arrays;
-=======
->>>>>>> upstream/Pavel
 import java.util.List;
 
 public class FinalLayer {
@@ -157,5 +153,9 @@ public class FinalLayer {
             e.printStackTrace();
         }
     }
-}
 
+
+
+
+
+}
