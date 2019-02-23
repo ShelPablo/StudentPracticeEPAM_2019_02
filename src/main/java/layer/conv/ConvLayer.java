@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class ConvLayer implements Layer {
 
     private List<List<Matrix>> kernels;
-    private List<Matrix> input;
+    private List<Matrix> input = new ArrayList<>();
     private List<Matrix> output;
     private int stride;
 
@@ -21,6 +21,13 @@ public abstract class ConvLayer implements Layer {
 
     public List<List<Matrix>> getKernels() {
         return kernels;
+    }
+
+    @Override
+    public Layer setInput(List<Matrix> input) {
+        this.input.clear();
+        this.input.addAll(input);
+        return this;
     }
 
     public List<Matrix> getInput() {
@@ -33,11 +40,6 @@ public abstract class ConvLayer implements Layer {
 
     public void setKernels(List<List<Matrix>> kernels) {
         this.kernels = kernels;
-    }
-    @Override
-    public Layer setInput(List<Matrix> input) {
-        this.input = input;
-        return this;
     }
 
     public void setOutput(List<Matrix> output) {
