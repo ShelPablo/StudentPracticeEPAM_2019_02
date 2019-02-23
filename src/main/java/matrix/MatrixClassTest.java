@@ -223,7 +223,7 @@ public class MatrixClassTest {
         Matrix expected_matrix = new MatrixClass(_matrix1);
         String string = "1.,2.,3.,4.;'\n'5.,6.,7.,8.";
 
-        Matrix actual_matrix = expected_matrix.fromString(string);
+        Matrix actual_matrix = MatrixClass.fromString(string);
 
         assertEquals(expected_matrix.getMatrix(),actual_matrix.getMatrix());
 

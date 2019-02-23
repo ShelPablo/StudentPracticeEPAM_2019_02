@@ -41,7 +41,7 @@ public interface Matrix {
 
 
     //Matrix from string
-    Matrix fromString(String string);
+    //Matrix fromString(String string);
 }
 
 

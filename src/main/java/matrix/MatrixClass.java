@@ -70,8 +70,9 @@ public class MatrixClass implements Matrix {
 
         if (getSize(1) != matrix.getSize(1) &&
                 getSize(2) != matrix.getSize(2)) {
-            throw new RuntimeException("Matrix sizes are different");
+            throw new IllegalArgumentException("Matrices dimensions must be equal");
         }
+
 
         List<List<Double>> hadamardMatrix = new ArrayList<List<Double>>();
 
@@ -182,8 +183,8 @@ public class MatrixClass implements Matrix {
         return Objects.hash(matrix);
     }
 
-    @Override
-    public Matrix fromString(String string){
+    //@Override
+    public static Matrix fromString(String string){
 
         List<List<Double>> matrixFromString = new ArrayList<>();
 
