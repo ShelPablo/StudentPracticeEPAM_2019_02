@@ -110,7 +110,8 @@ public class MatrixClass implements Matrix {
 
     @Override
     public Double convolute(Matrix matrix) {
-        if (getSize(2) == matrix.getSize(1))
+        if ((getSize(1) == matrix.getSize(1)) &&
+                (getSize(2) == matrix.getSize(2)))
         {
             double result = 0;
             for (int i = 0; i < getSize(1); i++) {
