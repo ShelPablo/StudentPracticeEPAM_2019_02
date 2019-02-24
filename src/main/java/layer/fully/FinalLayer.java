@@ -146,7 +146,6 @@ public class FinalLayer {
                 }
                 doubleListList.add(doubleList);
                 doubleList = new ArrayList<>();
-                string = bufferedReader.readLine();
             }
         }
         catch (IOException e){

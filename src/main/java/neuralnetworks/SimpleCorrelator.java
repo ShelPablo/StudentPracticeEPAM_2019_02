@@ -23,12 +23,15 @@ public class SimpleCorrelator {
 
     public SimpleCorrelator() {
         coefficientsSet = new ArrayList<List<Matrix>>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             coefficientsSet.add(new ArrayList<Matrix>()
             );
         }
     }
 
+    public List<List<Matrix>> getCoefficientsSet() {
+        return coefficientsSet;
+    }
 
     List<String> fileNames; // "rub50", "rub100", "rub200"
 
@@ -132,21 +135,38 @@ public class SimpleCorrelator {
             folder = new File(url.getPath());
         }
 
+
         List<Double> min = new ArrayList<>();
+
+        for (int i = 0; i<coefficientsSet.size();i++){
+            min.add(100.0);
+        }
+
+        String separator ;
+        String _char;
+        if(File.separatorChar=='/'){
+            separator = "/";
+            _char = "/";
+        }else{
+            separator ="\\\\";
+            _char = "\\";
+        }
+
+        List<Double> trainOutput = new ArrayList<>();
 
         for (File group : folder.listFiles()) {
             String groupName = group.getName();
-            List<Double> trainOutput = new ArrayList<>();
-            double el = 100000.0;
+
             for (File image : group.listFiles()) {
-                trainOutput = applyWithoutDecision(imageProcessor.loadImage(image.getPath()));
+                String[] path = image.getPath().split(separator);
+                String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
+                trainOutput = applyWithoutDecision(imageProcessor.loadImage(relativePath));
                 for (int i = 0; i<trainOutput.size();i++){
                     if (trainOutput.get(i)<min.get(i)){
-                        el = trainOutput.get(i);
+                        min.set(i,trainOutput.get(i));
                     }
                 }
             }
-            min.add(el);
         }
         this.thresholds = min;
         //applywithoutdecision - list double
@@ -161,6 +181,7 @@ public class SimpleCorrelator {
     public List<Double> applyWithoutDecision(List<Matrix> input){
         return finalLayer.apply(pool1.apply(conv1.apply(input)));
     }
+
 
 
     public void trainFinalLayer() {
