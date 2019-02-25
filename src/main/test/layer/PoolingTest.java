@@ -1,48 +1,44 @@
 package layer;
 
+import layer.pool.MaxPoolLayer;
 import matrix.Matrix;
 import matrix.MatrixClass;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PoolingTest {
 
     @Test
-    public void poolingTest(){
+    public void apply() {
+        List<List<Double>> _matrix1 = new ArrayList<>();
 
-        List<List<Double>> matrix = new ArrayList<>();
+        _matrix1.add(new ArrayList<>(Arrays.asList(1., 0., 2., 3., 1.)));
+        _matrix1.add(new ArrayList<>(Arrays.asList(4., 6., 6., 8., 2.)));
+        _matrix1.add(new ArrayList<>(Arrays.asList(3., 1., 1., 0., 0.)));
+        _matrix1.add(new ArrayList<>(Arrays.asList(1., 2., 2., 4., 1.)));
+        _matrix1.add(new ArrayList<>(Arrays.asList(0., 2., 3., 1., 1.)));
 
-        double k =0;
-        for(int i = 0; i<9;i++){
-            List<Double> matrixRow = new ArrayList<>();
-            for(int j = 0; j<9;j++){
-                matrixRow.add(k);
-                k++;
-            }
-            matrix.add(matrixRow);
-        }
+        Matrix matrix1 = new MatrixClass(_matrix1);
 
-        List<Matrix> m = new ArrayList<>();
-        m.add(new MatrixClass(matrix));
-        PoolingLayerClass poolingLayerClass = new PoolingLayerClass(4,4,m);
+        List<Matrix> matrices = new ArrayList<>();
+        matrices.add(matrix1);
 
-        List<List<Double>> result = new ArrayList<>();
-        List<Double> resultRow = new ArrayList<>();
-        resultRow.add(30d);
-        resultRow.add(34d);
-        result.add(resultRow);
-        resultRow = new ArrayList<>();
-        resultRow.add(66d);
-        resultRow.add(70d);
-        result.add(resultRow);
+        Layer poolingLayer = new MaxPoolLayer(2, 2);
+        poolingLayer.apply(matrices);
 
+        List<Matrix> output = poolingLayer.getOutput();
 
-        poolingLayerClass.apply();
-        Assert.assertEquals(result,poolingLayerClass.getOutput().get(0).getMatrix());
+        // Required output
+        List<List<Double>> _matrix2 = new ArrayList<>();
+        _matrix2.add(new ArrayList<>(Arrays.asList(6., 8.)));
+        _matrix2.add(new ArrayList<>(Arrays.asList(3., 4.)));
 
+        Matrix matrix2 = new MatrixClass(_matrix2);
+
+        Assert.assertEquals(output.get(0).getMatrix(), matrix2.getMatrix());
     }
-
 }

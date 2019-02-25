@@ -15,16 +15,9 @@ public class MaxPoolLayer implements Layer {
         this.cellSize2 = cellSize2;
     }
 
-    @Override
-    public Layer setInput(List<Matrix> input) {
-        this.input.clear();
-        this.input.addAll(input);
-        return this;
-    }
-
     private int cellSize1;
     private int cellSize2;
-    private List<Matrix> input;
+    private List<Matrix> input = new ArrayList<>();
     private List<Matrix> output = new ArrayList<>();
 
     public List<Matrix> getInput(){
@@ -35,7 +28,12 @@ public class MaxPoolLayer implements Layer {
         return this.output;
     }
 
-
+    @Override
+    public Layer setInput(List<Matrix> input) {
+        this.input.clear();
+        this.input.addAll(input);
+        return this;
+    }
     // Maximum function
     private double getMaxValue(Matrix input, int indexOfRow, int indexOfCol){
         double maxValue = 0;

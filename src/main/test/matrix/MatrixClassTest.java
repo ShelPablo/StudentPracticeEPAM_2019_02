@@ -1,7 +1,12 @@
 package matrix;
 
+<<<<<<< HEAD
+import matrix.Matrix;
+import matrix.MatrixClass;
+=======
 import layer.kernels.AlexNetKernelsVisualiser;
 import org.hamcrest.core.Is;
+>>>>>>> 01c88e528e8042734cbbe2d57a24575e1db63eac
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,9 +14,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+>>>>>>> 01c88e528e8042734cbbe2d57a24575e1db63eac
 public class MatrixClassTest {
 
     @Test
@@ -99,6 +107,7 @@ public class MatrixClassTest {
 
         MatrixClass expectedMatrix = (MatrixClass)matrix1.t();
 
+        // Required output
         List<List<Double>> _matrix2 = new ArrayList<>();
 
         _matrix2.add(new ArrayList<>(Arrays.asList(1., 1.)));
@@ -191,6 +200,9 @@ public class MatrixClassTest {
 
         assertEquals(expectedSize, actualSize);
     }
+<<<<<<< HEAD
+}
+=======
 
     @Test
     public void subMatrixTest() {
@@ -216,3 +228,4 @@ public class MatrixClassTest {
 
 
 }
+>>>>>>> 01c88e528e8042734cbbe2d57a24575e1db63eac

@@ -100,7 +100,6 @@ public class SimpleCorrelator {
         //sqrt(sum/N)
         return null;
     }
-
     public List<Double> getMaxDeviation() {
         //foreach Group
         //  max = 0
