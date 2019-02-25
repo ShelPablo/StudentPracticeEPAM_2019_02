@@ -10,7 +10,6 @@ import neuralnetworks.SimpleCorrelator;
 public class Application {
 
 /*    public static void main(String[] args) {
-
         //64x128
         Layer conv1 = new AlexConv1Layer();
         //16x32x96
@@ -25,17 +24,13 @@ public class Application {
                 //.initMethod('random')
                 .build();
         //32->16->6
-
         LayeredNeuralNetwork cnn = new CNN()
                 .addLayer(conv1)
                 .addLayer(conv2)
                 .addLayer(pool1)
                 .addLayer(fully);
-
        // cnn.train("folderTrain");
-
        // cnn.test("folderTest");
-
     }
 */
 
