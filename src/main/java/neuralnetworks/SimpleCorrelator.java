@@ -27,6 +27,9 @@ public class SimpleCorrelator {
             );}
     }
 
+    public List<List<Matrix>> getCoefficientsSet() {
+        return coefficientsSet;
+    }
 
     List<String> fileNames; // "rub50", "rub100", "rub200"
 
@@ -125,8 +128,62 @@ public class SimpleCorrelator {
         return decisions;
     }
 
+    public void setThresholds(List<Double> thresholds){
+        this.thresholds = thresholds;
+    }
+
 
     public List<Double> getThresholds() {
+
+        URL url = this.getClass().getClassLoader().getResource("TrainingSet");
+        File folder = null;
+        ImageProcessor imageProcessor = new ImageProcessorClass();
+        try {
+            folder = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            folder = new File(url.getPath());
+        }
+
+        HashMap map = new HashMap();
+        map.put("rub50", 0);
+        map.put("rub100", 1);
+        map.put("rub200", 2);
+        map.put("rub500", 3);
+        map.put("rub1000", 4);
+        map.put("rub5000", 5);
+
+
+        List<Double> min = new ArrayList<>();
+
+        for (int i = 0; i<coefficientsSet.size();i++){
+            min.add(100.0);
+        }
+
+        String separator ;
+        String _char;
+        if(File.separatorChar=='/'){
+            separator = "/";
+            _char = "/";
+        }else{
+            separator ="\\\\";
+            _char = "\\";
+        }
+
+        List<Double> trainOutput = new ArrayList<>();
+
+        for (File group : folder.listFiles()) {
+            String groupName = group.getName();
+
+            for (File image : group.listFiles()) {
+                String[] path = image.getPath().split(separator);
+                String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
+                trainOutput = applyWithoutDecision(imageProcessor.loadImage(relativePath));
+                if (trainOutput.get((int) map.get(groupName))<min.get((int) map.get(groupName))){
+                    min.set((int) map.get(groupName),trainOutput.get((int) map.get(groupName)));
+                }
+            }
+        }
+        this.thresholds = min;
         //applywithoutdecision - list double
         //foreach Group
         //  foreach image in TrainingSet
@@ -142,13 +199,7 @@ public class SimpleCorrelator {
     }
 
     public List<Double> applyWithoutDecision(List<Matrix> input){
-
-        List<Matrix> matrices = pool1.apply(conv1.apply(input));
-
-        //System.out.println(matrices.size());
-        //System.out.println(finalLayer.getCoefficientsSet().get(0).size());
-
-        return finalLayer.apply(matrices);
+        return finalLayer.apply(pool1.apply(conv1.apply(input)));
     }
 
     public void trainFinalLayer() {
