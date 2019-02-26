@@ -96,7 +96,12 @@ public class FinalLayer {
                         StringBuilder stringBuilder = new StringBuilder();
                         for (int y = 0; y < coefficientsSet.get(i).get(j).getSize(2); y++) {
                             double d = coefficientsSet.get(i).get(j).get(x, y);
-                            stringBuilder.append(String.valueOf(d)).append(" ");
+                            if (y ==coefficientsSet.get(i).get(j).getSize(2)){
+                                stringBuilder.append(String.valueOf(d)).append("\n");
+                            }
+                            else {
+                                stringBuilder.append(String.valueOf(d)).append(" ");
+                            }
                         }
                         fileWriter.append("\n");
                         fileWriter.write(stringBuilder.toString());
@@ -137,7 +142,7 @@ public class FinalLayer {
                 }
                 if (string.contains("]")){
                     matrixList.add(new MatrixClass(doubleListList));
-                    doubleList = new ArrayList<>();
+                    doubleListList = new ArrayList<>();
                     continue;
                 }
                 String[] strings = string.split(" ");
