@@ -9,7 +9,7 @@ public class PreFullyLayer {
     //8x16x(96+1)
     List<Matrix> input;
     //8x16x(96+1)
-    List<List<List<Double>>> coefficients;
+    List<Matrix> coefficients;
     //128  (8x16)
     List<Double> output;
 
@@ -31,7 +31,6 @@ public class PreFullyLayer {
 
         //formula
         return null;//deltaX;
-
     }
 
     void seedCoefficients() {

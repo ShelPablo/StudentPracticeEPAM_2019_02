@@ -32,8 +32,8 @@ public class LastFullyLayer {
         return null;//deltaX
     }
 
-    //void upload/download coefficients
-
+    void uploadCoefficients() {};
+    void downloadCoefficients() {};
 
     public List<Double> apply(List<Double> input) {
         //128
