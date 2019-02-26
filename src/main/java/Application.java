@@ -1,6 +1,9 @@
+import imageprocessor.ImageLoader;
+import imageprocessor.ImageLoaderClass;
 import layer.Layer;
 import layer.conv.AlexConv1Layer;
 import layer.conv.Simple3dConvLayer;
+import layer.fully.FinalLayer;
 import layer.fully.FullyConnectedLayerBuilder;
 import layer.pool.MaxPoolLayer;
 import neuralnetworks.CNN;
@@ -41,11 +44,12 @@ public class Application {
 
     public static void main(String[] args) {
         SimpleCorrelator simpleCorrelator = new SimpleCorrelator();
-
+        FinalLayer finalLayer = new FinalLayer();
         simpleCorrelator.trainFinalLayer();
         simpleCorrelator.getThresholds();
+        String path = "TestSet/rub100/99.jpg";
+        ImageLoader imageLoader = new ImageLoaderClass();
+        imageLoader.loadImageAsMatrix(path);
+        System.out.println(simpleCorrelator.apply(imageLoader.loadImageAsMatrix(path)));
     }
-
-
-
 }

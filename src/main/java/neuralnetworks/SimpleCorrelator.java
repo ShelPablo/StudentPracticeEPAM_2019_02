@@ -123,7 +123,6 @@ public class SimpleCorrelator {
         return decisions;
     }
 
-
     public List<Double> getThresholds() {
 
         URL url = this.getClass().getClassLoader().getResource("TrainingSet");
@@ -169,13 +168,6 @@ public class SimpleCorrelator {
             }
         }
         this.thresholds = min;
-        //applywithoutdecision - list double
-        //foreach Group
-        //  foreach image in TrainingSet
-        //     trainOutput =  apply().get(groupIdx)
-        //     min ?= trainOutput
-        //  addToList(min)
-        //return List
         return thresholds;
     }
     public List<Double> applyWithoutDecision(List<Matrix> input){
@@ -207,7 +199,8 @@ public class SimpleCorrelator {
         if(File.separatorChar=='/'){
             separator = "/";
             _char = "/";
-        }else{
+        }
+        else{
             separator ="\\\\";
             _char = "\\";
         }
@@ -230,7 +223,7 @@ public class SimpleCorrelator {
         this.finalLayer.setCoefficientsSet(this.coefficientsSet);
 
         this.finalLayer.uploadCeffSetToFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
-        //this.finalLayer.downloadCeffSetFromFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
+        this.finalLayer.downloadCeffSetFromFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
 
     }
 
