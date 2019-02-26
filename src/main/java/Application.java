@@ -43,8 +43,7 @@ public class Application {
         SimpleCorrelator simpleCorrelator = new SimpleCorrelator();
 
         simpleCorrelator.trainFinalLayer();
-
-
+        simpleCorrelator.getThresholds();
     }
 
 
