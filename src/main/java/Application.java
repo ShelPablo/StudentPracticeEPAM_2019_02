@@ -7,6 +7,8 @@ import neuralnetworks.CNN;
 import neuralnetworks.LayeredNeuralNetwork;
 import neuralnetworks.SimpleCorrelator;
 
+import java.util.List;
+
 public class Application {
 
 /*    public static void main(String[] args) {
@@ -34,13 +36,16 @@ public class Application {
     }
 */
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         SimpleCorrelator simpleCorrelator = new SimpleCorrelator();
 
         simpleCorrelator.trainFinalLayer();
 
-
     }
+*/
+
+
+
 
 
 
