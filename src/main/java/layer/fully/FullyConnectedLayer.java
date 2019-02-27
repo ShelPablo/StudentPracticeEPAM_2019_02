@@ -19,6 +19,9 @@ public class FullyConnectedLayer implements Layer {
         return null;
     }
 
+
+
+
     @Override
     public Layer setInput(List<Matrix> input) {
         return null;

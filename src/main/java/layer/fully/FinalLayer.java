@@ -32,6 +32,7 @@ public class FinalLayer {
 
     public List<Double> apply(List<Matrix> input) {
 
+        setCoefficientsSet(downloadCeffSetFromFile("/Users/mrgrigorev/IdeaProjects/StudentPracticeEPAM_2019_02_1/target/classes/CoeffSet.txt"));
         if (coefficientsSet.get(0).size() == input.size()){
             setInput(input);
 
@@ -117,7 +118,7 @@ public class FinalLayer {
         }
     }
 
-    public void downloadCeffSetFromFile(String filename) {
+    public List<List<Matrix>> downloadCeffSetFromFile(String filename) {
         try{
 
             File file = new File(filename);
@@ -156,6 +157,7 @@ public class FinalLayer {
         catch (IOException e){
             e.printStackTrace();
         }
+        return coefficientsSet;
     }
 
 
