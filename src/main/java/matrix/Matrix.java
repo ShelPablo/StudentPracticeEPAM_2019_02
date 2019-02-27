@@ -3,7 +3,7 @@ package matrix;
 import java.util.List;
 
 public interface Matrix {
-    
+
     List<List<Double>> getMatrix();
 
 
@@ -43,6 +43,3 @@ public interface Matrix {
     //Matrix from string
     //Matrix fromString(String string);
 }
-
-
-

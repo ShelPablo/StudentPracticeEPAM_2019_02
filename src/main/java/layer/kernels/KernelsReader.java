@@ -4,8 +4,6 @@ import matrix.Matrix;
 import matrix.MatrixClass;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,16 +15,8 @@ public class KernelsReader {
         List<List<Matrix>> kernels = new ArrayList<>();
         ArrayList<Matrix> kernel = new ArrayList<>();
 
-
-        URL url = ClassLoader.getSystemResource(filename);
-
         try{
-            File file = null;
-            try {
-                file = new File(url.toURI());
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+            File file = new File(filename);
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
 
