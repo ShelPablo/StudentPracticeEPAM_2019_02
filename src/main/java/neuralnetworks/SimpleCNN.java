@@ -46,7 +46,9 @@ public class SimpleCNN {
         //foreach layer apply (without decision)
         //foreach fully layers train, starting with LastFully.train(trueOutput)
 
-    }
+            
+        }
+
 
     void trainWholeCNN() {
         //foreach group
@@ -67,6 +69,6 @@ public class SimpleCNN {
     public List<Double> applyWithoutDecision(List<Matrix> input){
 
 
-        return null;
+        return lastFullyLayer.apply(preFullyLayer.apply(pool1.apply(conv1.apply(input))));
     }
 }
