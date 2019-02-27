@@ -39,7 +39,19 @@ public class LastFullyLayer {
     void uploadCoefficients() {};
     void downloadCoefficients() {};
 
-    public List<Double> apply(List<Double> input) {
+    private List<Boolean> getDecision(List<Double> inputList)
+    {
+        List<Boolean> decision = new ArrayList<>();
+        double max = Collections.max(inputList);
+        for (int i = 0; i < inputList.size(); i++) {
+            if (inputList.get(i) < max) { decision.add(false);  }
+            else { decision.add(true); }
+        }
+        return  decision;
+    }
+
+
+    public List<Boolean> applyWithDecision(List<Double> input) {
         input.add(1.);
         List<List<Double>> l = new ArrayList<>();
             l.add(input);
@@ -50,20 +62,21 @@ public class LastFullyLayer {
         {
             preOutput.set(i, Sigmoid.sigmoid(preOutput.get(i)));
         }
-        double max = Collections.max(preOutput);
-        for (int i = 0; i < preOutput.size(); i++) {
-          if (preOutput.get(i) < max) { preOutput.set(i, 0.); }
+        return getDecision(preOutput);
+    }
+
+    public List<Double> apply(List<Double> input) {
+        input.add(1.);
+        List<List<Double>> l = new ArrayList<>();
+        l.add(input);
+        Matrix inputMatrix = new MatrixClass(l);
+        Matrix outputMatrix = inputMatrix.x(this.coefficients.t());
+        List<Double> preOutput = outputMatrix.getMatrix().get(0);
+        for (int i = 0; i < preOutput.size(); i++)
+        {
+            preOutput.set(i, Sigmoid.sigmoid(preOutput.get(i)));
         }
-        //Matrix inputMatrix = new MatrixClass(new ArrayList<List<Double>>().add(input));
-        //128
-        //add bias -> 128+1
-        //x coefficients (Matrix multiplication)
-        //6
-        // foreach sigmoid
-        // foreach getDecision - select max
-
-
-        return this.output = preOutput;
+        return this.output=preOutput;
     }
 
     void seedCoefficients() {
