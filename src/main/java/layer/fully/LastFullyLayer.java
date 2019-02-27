@@ -30,7 +30,7 @@ public class LastFullyLayer {
             //(y-y')
             error = trueOutput.get(i) - this.output.get(i);
             //sigmoidDerivative(y')
-            sigmoidDerivative = Sigmoid.sigmoidDerivative(Sigmoid.sigmoid(this.output.get(i)));
+            sigmoidDerivative = Sigmoid.sigmoidDerivative(this.output.get(i));
             // Delta W = dE/dy'*  dy/dz * rate
             deltaW.add(error * sigmoidDerivative *this.trainingRate);
             deltaWWithoutRate.add(error*sigmoidDerivative);
