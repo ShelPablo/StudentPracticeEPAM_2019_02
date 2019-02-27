@@ -21,16 +21,30 @@ import java.util.*;
 
 public class SimpleCorrelator {
 
-    public SimpleCorrelator() {
-        coefficientsSet = new ArrayList<List<Matrix>>();
-        for (int i = 0; i < 6; i++) {
-            coefficientsSet.add(new ArrayList<Matrix>()
-            );
+    public SimpleCorrelator(){
+        setCoefficientsSet(finalLayer.downloadCeffSetFromFile("/Users/mrgrigorev/IdeaProjects/StudentPracticeEPAM_2019_02_1/target/classes/CoeffSet.txt"));
+        List<Integer> index = new ArrayList<>(Arrays.asList(78,79,55,44,43,39,38,31,9,3));
+        List<List<Matrix>> _coeffs = new ArrayList<>();
+        for (int i = 0; i< coefficientsSet.size(); i++){
+            List<Matrix> coeffs = new ArrayList<>();
+            for (int j = 0; j<index.size();j++){
+                coeffs.add(coefficientsSet.get(i).get(index.get(j)));
+            }
+            _coeffs.add(coeffs);
         }
+        this.coefficientsSet = _coeffs;
+    }
+
+    public void setThresholds(List<Double> thresholds) {
+        this.thresholds = thresholds;
     }
 
     public List<List<Matrix>> getCoefficientsSet() {
         return coefficientsSet;
+    }
+
+    public void setCoefficientsSet(List<List<Matrix>> coefficientsSet) {
+        this.coefficientsSet = coefficientsSet;
     }
 
     List<String> fileNames; // "rub50", "rub100", "rub200"
@@ -221,7 +235,6 @@ public class SimpleCorrelator {
         xWeightCoefs();
 
         this.finalLayer.setCoefficientsSet(this.coefficientsSet);
-
         this.finalLayer.uploadCeffSetToFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
         this.finalLayer.downloadCeffSetFromFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
 

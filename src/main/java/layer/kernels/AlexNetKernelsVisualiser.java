@@ -8,6 +8,7 @@ import matrix.MatrixClass;
 import java.util.ArrayList;
 import java.util.List;
 
+//сделать только с выбранными фильтрами!
 
 public class AlexNetKernelsVisualiser {
     public void ShowKernels(List<List<Matrix>> kernelsList)

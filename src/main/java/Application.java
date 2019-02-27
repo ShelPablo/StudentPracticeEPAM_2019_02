@@ -6,9 +6,14 @@ import layer.conv.Simple3dConvLayer;
 import layer.fully.FinalLayer;
 import layer.fully.FullyConnectedLayerBuilder;
 import layer.pool.MaxPoolLayer;
+import matrix.Matrix;
 import neuralnetworks.CNN;
 import neuralnetworks.LayeredNeuralNetwork;
 import neuralnetworks.SimpleCorrelator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Application {
 
@@ -44,12 +49,11 @@ public class Application {
 
     public static void main(String[] args) {
         SimpleCorrelator simpleCorrelator = new SimpleCorrelator();
-        FinalLayer finalLayer = new FinalLayer();
-        simpleCorrelator.trainFinalLayer();
-        simpleCorrelator.getThresholds();
-        String path = "TestSet/rub100/99.jpg";
+        //simpleCorrelator.trainFinalLayer();
+        //simpleCorrelator.getThresholds();
+        simpleCorrelator.setThresholds(new ArrayList<>(Arrays.asList(0.6,0.6,0.6,0.6,0.6,0.6)));
+        String path = "TestSet/rub5000/100.jpg";
         ImageLoader imageLoader = new ImageLoaderClass();
-        imageLoader.loadImageAsMatrix(path);
         System.out.println(simpleCorrelator.apply(imageLoader.loadImageAsMatrix(path)));
     }
 }
