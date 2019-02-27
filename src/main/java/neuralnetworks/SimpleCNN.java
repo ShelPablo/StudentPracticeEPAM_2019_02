@@ -15,6 +15,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,6 +55,16 @@ public class SimpleCNN {
         //  train(image, trueOutput(group))
     }
 
+    private List<Boolean> getDecisionByMax (List<Double> inputList)
+    {
+        List<Boolean> decision = new ArrayList<>();
+        double max = Collections.max(inputList);
+        for (int i = 0; i < inputList.size(); i++) {
+            if (inputList.get(i) < max) { decision.add(false);  }
+            else { decision.add(true); }
+        }
+        return  decision;
+    }
 
     private List<Boolean> getDecision(List<Double> correlationCoefficients) {
         List<Boolean> decisions = new ArrayList<>();
