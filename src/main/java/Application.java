@@ -11,11 +11,8 @@ import neuralnetworks.CNN;
 import neuralnetworks.LayeredNeuralNetwork;
 import neuralnetworks.SimpleCorrelator;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 import java.util.List;
 
 public class Application {
@@ -52,7 +49,6 @@ public class Application {
 
 /*    public static void main(String[] args) {
         SimpleCorrelator simpleCorrelator = new SimpleCorrelator();
-<<<<<<< HEAD
         //simpleCorrelator.trainFinalLayer();
         //simpleCorrelator.getThresholds();
         simpleCorrelator.setThresholds(new ArrayList<>(Arrays.asList(0.6,0.6,0.6,0.6,0.6,0.6)));
@@ -60,7 +56,6 @@ public class Application {
         ImageLoader imageLoader = new ImageLoaderClass();
         System.out.println(simpleCorrelator.apply(imageLoader.loadImageAsMatrix(path)));
     }
-=======
 
         simpleCorrelator.trainFinalLayer();
 
@@ -72,5 +67,4 @@ public class Application {
 
 
 
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 }

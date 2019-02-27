@@ -12,47 +12,23 @@ import matrix.Matrix;
 import matrix.MatrixClass;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SimpleCorrelator {
 
-<<<<<<< HEAD
-    public SimpleCorrelator(){
-        setCoefficientsSet(finalLayer.downloadCeffSetFromFile("/Users/mrgrigorev/IdeaProjects/StudentPracticeEPAM_2019_02_1/target/classes/CoeffSet.txt"));
-        List<Integer> index = new ArrayList<>(Arrays.asList(78,79,55,44,43,39,38,31,9,3));
-        List<List<Matrix>> _coeffs = new ArrayList<>();
-        for (int i = 0; i< coefficientsSet.size(); i++){
-            List<Matrix> coeffs = new ArrayList<>();
-            for (int j = 0; j<index.size();j++){
-                coeffs.add(coefficientsSet.get(i).get(index.get(j)));
-            }
-            _coeffs.add(coeffs);
-        }
-        this.coefficientsSet = _coeffs;
-    }
-
-    public void setThresholds(List<Double> thresholds) {
-        this.thresholds = thresholds;
-    }
-
-    public List<List<Matrix>> getCoefficientsSet() {
-        return coefficientsSet;
-=======
     public SimpleCorrelator() {
         coefficientsSet = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             coefficientsSet.add(new ArrayList<>()
             );}
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
     }
 
-    public void setCoefficientsSet(List<List<Matrix>> coefficientsSet) {
-        this.coefficientsSet = coefficientsSet;
+    public List<List<Matrix>> getCoefficientsSet() {
+        return coefficientsSet;
     }
 
     List<String> fileNames; // "rub50", "rub100", "rub200"
@@ -69,10 +45,7 @@ public class SimpleCorrelator {
             "0.00,0.62,0.70,0.80,0.86,0.93,0.95,0.95,0.95,0.93,0.86,0.80,0.70,0.62,0.00;'\n'" +
             "0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00";
     Matrix weights = MatrixClass.fromString(weightsStr).t();
-<<<<<<< HEAD
-=======
 
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 
 
     private int trainingSetVolume = 0;
@@ -99,21 +72,26 @@ public class SimpleCorrelator {
     //Group - recognition class (100rub, 200rub ...)
     public void trainCoefSetForGroup(List<Matrix> inputRGBimage, int groupIdx) {
         trainingSetVolume++;
-//        System.out.println(trainingSetVolume);
+        System.out.println(trainingSetVolume);
         List<Matrix> filteredImage = conv1.apply(inputRGBimage);
         List<Matrix> result = pool1.apply(filteredImage);
-        if (coefficientsSet.get(groupIdx).size() == 0) {
-            for (int l = 0; l < 96; l++) {
+        if (coefficientsSet.get(groupIdx).size() == 0)
+        {
+            for (int l = 0; l<96; l++)
+            {
                 coefficientsSet.get(groupIdx).add(this.createNullMatrix
                         (result.get(0).getSize(1), result.get(0).getSize(2)));
             }
         }
-        for (int i = 0; i < 96; i++) {
-            for (int r = 0; r < result.get(0).getSize(1); r++) {
-                for (int c = 0; c < result.get(0).getSize(2); c++) {
+        for (int i = 0; i < 96; i++)
+        {
+            for (int r = 0; r < result.get(0).getSize(1); r++)
+            {
+                for (int c = 0; c < result.get(0).getSize(2); c++)
+                {
                     coefficientsSet.get(groupIdx).get(i).set(r, c,
-                            ((coefficientsSet.get(groupIdx).get(i).get(r, c) * trainingSetVolume - 1)
-                                    + result.get(i).get(r, c)) / trainingSetVolume);
+                            ((coefficientsSet.get(groupIdx).get(i).get(r, c)*trainingSetVolume-1)
+                                    +result.get(i).get(r, c))/trainingSetVolume);
 
                 }
             }
@@ -129,6 +107,7 @@ public class SimpleCorrelator {
         //sqrt(sum/N)
         return null;
     }
+
     public List<Double> getMaxDeviation() {
         //foreach Group
         //  max = 0
@@ -143,14 +122,18 @@ public class SimpleCorrelator {
     private List<Boolean> getDecision(List<Double> correlationCoefficients) {
         List<Boolean> decisions = new ArrayList<>();
         for (int i = 0; i < this.thresholds.size(); i++) {
-            decisions.add(correlationCoefficients.get(i) > this.thresholds.get(i));
+            decisions.add(correlationCoefficients.get(i) > this.thresholds.get(i)  );
         }
 
         return decisions;
     }
 
+    public void setThresholds(List<Double> thresholds){
+        this.thresholds = thresholds;
+    }
+
+
     public List<Double> getThresholds() {
-<<<<<<< HEAD
 
         URL url = this.getClass().getClassLoader().getResource("TrainingSet");
         File folder = null;
@@ -160,6 +143,14 @@ public class SimpleCorrelator {
         } catch (URISyntaxException e) {
             folder = new File(url.getPath());
         }
+
+        HashMap map = new HashMap();
+        map.put("rub50", 0);
+        map.put("rub100", 1);
+        map.put("rub200", 2);
+        map.put("rub500", 3);
+        map.put("rub1000", 4);
+        map.put("rub5000", 5);
 
 
         List<Double> min = new ArrayList<>();
@@ -187,21 +178,12 @@ public class SimpleCorrelator {
                 String[] path = image.getPath().split(separator);
                 String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
                 trainOutput = applyWithoutDecision(imageProcessor.loadImage(relativePath));
-                for (int i = 0; i<trainOutput.size();i++){
-                    if (trainOutput.get(i)<min.get(i)){
-                        min.set(i,trainOutput.get(i));
-                    }
+                if (trainOutput.get((int) map.get(groupName))<min.get((int) map.get(groupName))){
+                    min.set((int) map.get(groupName),trainOutput.get((int) map.get(groupName)));
                 }
             }
         }
         this.thresholds = min;
-        return thresholds;
-    }
-    public List<Double> applyWithoutDecision(List<Matrix> input){
-        return finalLayer.apply(pool1.apply(conv1.apply(input)));
-    }
-
-=======
         //applywithoutdecision - list double
         //foreach Group
         //  foreach image in TrainingSet
@@ -217,17 +199,8 @@ public class SimpleCorrelator {
     }
 
     public List<Double> applyWithoutDecision(List<Matrix> input){
-
-        List<Matrix> matrices = pool1.apply(conv1.apply(input));
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
-
-        //System.out.println(matrices.size());
-        //System.out.println(finalLayer.getCoefficientsSet().get(0).size());
-
-        return finalLayer.apply(matrices);
+        return finalLayer.apply(pool1.apply(conv1.apply(input)));
     }
-
-    public void trainFinalLayer() {
 
     public void trainFinalLayer() {
 
@@ -252,12 +225,7 @@ public class SimpleCorrelator {
         if(File.separatorChar=='/'){
             separator = "/";
             _char = "/";
-<<<<<<< HEAD
-        }
-        else{
-=======
         }else{
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
             separator ="\\\\";
             _char = "\\";
         }
@@ -268,10 +236,6 @@ public class SimpleCorrelator {
             String groupName = group.getName();
             this.trainingSetVolume = 0;
             for (File image : group.listFiles()) {
-<<<<<<< HEAD
-
-=======
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
                 String[] path = image.getPath().split(separator);
                 String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
                 trainCoefSetForGroup(imageProcessor.loadImage(relativePath), (int) map.get(groupName));
@@ -280,11 +244,6 @@ public class SimpleCorrelator {
 
         xWeightCoefs();
 
-<<<<<<< HEAD
-        this.finalLayer.setCoefficientsSet(this.coefficientsSet);
-        this.finalLayer.uploadCeffSetToFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
-        this.finalLayer.downloadCeffSetFromFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
-=======
         url = this.getClass().getClassLoader().getResource("CoeffSet.txt");
 
         File file = null;
@@ -299,16 +258,17 @@ public class SimpleCorrelator {
 
         this.finalLayer.uploadCeffSetToFile(file.getPath());
         //this.finalLayer.downloadCeffSetFromFile(file.getPath());
->>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 
     }
 
-
-    private Matrix createNullMatrix(int rows, int columns) {
+    private Matrix createNullMatrix(int rows, int columns)
+    {
         List<List<Double>> _matrix = new ArrayList<>();
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < rows; i++)
+        {
             _matrix.add(new ArrayList<>());
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < columns; j++)
+            {
                 _matrix.get(i).add(0.);
             }
         }
