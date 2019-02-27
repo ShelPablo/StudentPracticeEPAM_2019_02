@@ -1,8 +1,14 @@
 package layer.fully;
 
 import matrix.Matrix;
+import matrix.MatrixClass;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FinalLayer {
@@ -32,15 +38,25 @@ public class FinalLayer {
 
             List<Double> output = new ArrayList<>();
 
+            List<Integer> indicesOfNecessaryFilters = Arrays.asList(3, 9, 31, 38, 39, 43, 44, 55, 78, 79);
+
             for (List<Matrix> coefficients: coefficientsSet){
                 double result = 0;
 
-                for (int i = 0; i < coefficients.size(); i++){
-                    double value = coefficients.get(i).convolute(input.get(i));
+                List<Matrix> necessaryInput = new ArrayList<>();
+                List<Matrix> necessaryCoefficients = new ArrayList<>();
+
+                for (Integer i: indicesOfNecessaryFilters){
+                    necessaryInput.add(input.get(i));
+                    necessaryCoefficients.add(coefficients.get(i));
+                }
+
+                for (int i = 0; i < necessaryCoefficients.size(); i++){
+                    double value = necessaryCoefficients.get(i).convolute(necessaryInput.get(i));
                     result += value;
                 }
 
-                result = result / (forNormalization(coefficients)*forNormalization(input));
+                result = result / (forNormalization(necessaryCoefficients)*forNormalization(necessaryInput));
 
                 output.add(result);
             }
@@ -69,11 +85,83 @@ public class FinalLayer {
 
     public void uploadCeffSetToFile(String filename) {
 
+        Path path = Paths.get(filename);
+
+        if (!Files.exists(path)){
+            File file = new File(filename);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(filename, false);
+
+            for (int i = 0; i < coefficientsSet.size(); i++) {
+                fileWriter.append("{\n");
+                for (int j = 0; j < coefficientsSet.get(i).size(); j++) {
+                    fileWriter.append("[");
+                    for (int x = 0; x < coefficientsSet.get(i).get(j).getSize(1); x++) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int y = 0; y < coefficientsSet.get(i).get(j).getSize(2); y++) {
+                            double d = coefficientsSet.get(i).get(j).get(x, y);
+                            stringBuilder.append(String.valueOf(d)).append(" ");
+                        }
+                        fileWriter.append("\n");
+                        fileWriter.write(stringBuilder.toString());
+                    }
+                    fileWriter.append("\n]\n");
+                }
+                fileWriter.append("}\n");
+            }
+            fileWriter.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void downloadCeffSetFromFile(String filename) {
-
+        try{
+            File file = new File(filename);
+            FileReader fr = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fr);
+            coefficientsSet = new ArrayList<>();
+            String string;
+            List<Matrix> matrixList = new ArrayList<>();
+            List<Double> doubleList = new ArrayList<>();
+            List<List<Double>> doubleListList = new ArrayList<>();
+            while ((string = bufferedReader.readLine())!=null){
+                if (string.contains("[")||string.contains("{")){
+                    continue;
+                }
+                if (string.contains("}")){
+                    coefficientsSet.add(matrixList);
+                    matrixList = new ArrayList<>();
+                    continue;
+                }
+                if (string.contains("]")){
+                    matrixList.add(new MatrixClass(doubleListList));
+                    doubleListList = new ArrayList<>();
+                    continue;
+                }
+                String[] strings = string.split(" ");
+                for (String s: strings) {
+                    doubleList.add(Double.parseDouble(s));
+                }
+                doubleListList.add(doubleList);
+                doubleList = new ArrayList<>();
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
+
+
 
 
 }
