@@ -22,11 +22,12 @@ import java.util.*;
 public class SimpleCorrelator {
 
     public SimpleCorrelator() {
-        coefficientsSet = new ArrayList<List<Matrix>>();
-        for (int i = 0; i < 4; i++) {
-            coefficientsSet.add(new ArrayList<Matrix>()
-            );
-        }
+
+        coefficientsSet = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            coefficientsSet.add(new ArrayList<>()
+            );}
+
     }
 
 
@@ -44,6 +45,7 @@ public class SimpleCorrelator {
             "0.00,0.62,0.70,0.80,0.86,0.93,0.95,0.95,0.95,0.93,0.86,0.80,0.70,0.62,0.00;'\n'" +
             "0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00";
     Matrix weights = MatrixClass.fromString(weightsStr).t();
+
 
 
     private int trainingSetVolume = 0;
@@ -122,13 +124,29 @@ public class SimpleCorrelator {
 
 
     public List<Double> getThresholds() {
+        //applywithoutdecision - list double
         //foreach Group
         //  foreach image in TrainingSet
+        //      trainCoefSetForGroup
+        //xWeightCoefs
+        //finalLayer.setCoefs(coefficients)
+        //finalLayer.uploadCoefs
         //     trainOutput =  apply().get(groupIdx)
         //     min ?= trainOutput
         //  addToList(min)
         //return List
-        return null;
+        return thresholds;
+    }
+
+    public List<Double> applyWithoutDecision(List<Matrix> input){
+
+        List<Matrix> matrices = pool1.apply(conv1.apply(input));
+
+
+        //System.out.println(matrices.size());
+        //System.out.println(finalLayer.getCoefficientsSet().get(0).size());
+
+        return finalLayer.apply(matrices);
     }
 
     public void trainFinalLayer() {
@@ -150,6 +168,7 @@ public class SimpleCorrelator {
         map.put("rub500", 3);
         map.put("rub1000", 4);
         map.put("rub5000", 5);
+
 
         String separator;
         String _char;
@@ -177,7 +196,9 @@ public class SimpleCorrelator {
 
         xWeightCoefs();
 
+
         url = this.getClass().getClassLoader().getResource("CoeffSelt.txt");
+
 
         File file = null;
         try {
@@ -190,7 +211,8 @@ public class SimpleCorrelator {
         this.finalLayer.setCoefficientsSet(this.coefficientsSet);
 
         this.finalLayer.uploadCeffSetToFile(file.getPath());
-        this.finalLayer.downloadCeffSetFromFile(file.getPath());
+
+        //this.finalLayer.downloadCeffSetFromFile(file.getPath());
 
 
     }
