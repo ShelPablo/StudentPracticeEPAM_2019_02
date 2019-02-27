@@ -21,6 +21,7 @@ import java.util.*;
 
 public class SimpleCorrelator {
 
+<<<<<<< HEAD
     public SimpleCorrelator(){
         setCoefficientsSet(finalLayer.downloadCeffSetFromFile("/Users/mrgrigorev/IdeaProjects/StudentPracticeEPAM_2019_02_1/target/classes/CoeffSet.txt"));
         List<Integer> index = new ArrayList<>(Arrays.asList(78,79,55,44,43,39,38,31,9,3));
@@ -41,6 +42,13 @@ public class SimpleCorrelator {
 
     public List<List<Matrix>> getCoefficientsSet() {
         return coefficientsSet;
+=======
+    public SimpleCorrelator() {
+        coefficientsSet = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            coefficientsSet.add(new ArrayList<>()
+            );}
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
     }
 
     public void setCoefficientsSet(List<List<Matrix>> coefficientsSet) {
@@ -61,6 +69,10 @@ public class SimpleCorrelator {
             "0.00,0.62,0.70,0.80,0.86,0.93,0.95,0.95,0.95,0.93,0.86,0.80,0.70,0.62,0.00;'\n'" +
             "0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00";
     Matrix weights = MatrixClass.fromString(weightsStr).t();
+<<<<<<< HEAD
+=======
+
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 
 
     private int trainingSetVolume = 0;
@@ -138,6 +150,7 @@ public class SimpleCorrelator {
     }
 
     public List<Double> getThresholds() {
+<<<<<<< HEAD
 
         URL url = this.getClass().getClassLoader().getResource("TrainingSet");
         File folder = null;
@@ -188,7 +201,33 @@ public class SimpleCorrelator {
         return finalLayer.apply(pool1.apply(conv1.apply(input)));
     }
 
+=======
+        //applywithoutdecision - list double
+        //foreach Group
+        //  foreach image in TrainingSet
+        //      trainCoefSetForGroup
+        //xWeightCoefs
+        //finalLayer.setCoefs(coefficients)
+        //finalLayer.uploadCoefs
+        //     trainOutput =  apply().get(groupIdx)
+        //     min ?= trainOutput
+        //  addToList(min)
+        //return List
+        return thresholds;
+    }
 
+    public List<Double> applyWithoutDecision(List<Matrix> input){
+
+        List<Matrix> matrices = pool1.apply(conv1.apply(input));
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
+
+        //System.out.println(matrices.size());
+        //System.out.println(finalLayer.getCoefficientsSet().get(0).size());
+
+        return finalLayer.apply(matrices);
+    }
+
+    public void trainFinalLayer() {
 
     public void trainFinalLayer() {
 
@@ -213,8 +252,12 @@ public class SimpleCorrelator {
         if(File.separatorChar=='/'){
             separator = "/";
             _char = "/";
+<<<<<<< HEAD
         }
         else{
+=======
+        }else{
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
             separator ="\\\\";
             _char = "\\";
         }
@@ -225,7 +268,10 @@ public class SimpleCorrelator {
             String groupName = group.getName();
             this.trainingSetVolume = 0;
             for (File image : group.listFiles()) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
                 String[] path = image.getPath().split(separator);
                 String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
                 trainCoefSetForGroup(imageProcessor.loadImage(relativePath), (int) map.get(groupName));
@@ -234,9 +280,26 @@ public class SimpleCorrelator {
 
         xWeightCoefs();
 
+<<<<<<< HEAD
         this.finalLayer.setCoefficientsSet(this.coefficientsSet);
         this.finalLayer.uploadCeffSetToFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
         this.finalLayer.downloadCeffSetFromFile(this.getClass().getClassLoader().getResource("CoeffSet.txt").getPath());
+=======
+        url = this.getClass().getClassLoader().getResource("CoeffSet.txt");
+
+        File file = null;
+        try {
+            file = new File(url.toURI());
+
+        } catch (URISyntaxException e) {
+            file = new File(url.getPath());
+        }
+
+        this.finalLayer.setCoefficientsSet(this.coefficientsSet);
+
+        this.finalLayer.uploadCeffSetToFile(file.getPath());
+        //this.finalLayer.downloadCeffSetFromFile(file.getPath());
+>>>>>>> a591b4f5cb8ac6f7e986b85d3e0be0ffa74d4379
 
     }
 
