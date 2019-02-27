@@ -257,7 +257,7 @@ public class SimpleCorrelator {
         this.finalLayer.setCoefficientsSet(this.coefficientsSet);
 
         this.finalLayer.uploadCeffSetToFile(file.getPath());
-        //this.finalLayer.downloadCeffSetFromFile(file.getPath());
+        this.finalLayer.downloadCeffSetFromFile(file.getPath());
 
     }
 
