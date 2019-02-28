@@ -38,25 +38,25 @@ public class FinalLayer {
 
             List<Double> output = new ArrayList<>();
 
-            List<Integer> indicesOfNecessaryFilters = Arrays.asList(3, 9, 31, 38, 39, 43, 44, 55, 78, 79);
+            //List<Integer> indicesOfNecessaryFilters = Arrays.asList(3, 9, 31, 38, 39, 43, 44, 55, 78, 79);
 
             for (List<Matrix> coefficients: coefficientsSet){
                 double result = 0;
 
-                List<Matrix> necessaryInput = new ArrayList<>();
-                List<Matrix> necessaryCoefficients = new ArrayList<>();
+                //List<Matrix> necessaryInput = new ArrayList<>();
+                //List<Matrix> necessaryCoefficients = new ArrayList<>();
 
-                for (Integer i: indicesOfNecessaryFilters){
+                /*for (Integer i: indicesOfNecessaryFilters){
                     necessaryInput.add(input.get(i));
                     necessaryCoefficients.add(coefficients.get(i));
-                }
+                }*/
 
-                for (int i = 0; i < necessaryCoefficients.size(); i++){
-                    double value = necessaryCoefficients.get(i).convolute(necessaryInput.get(i));
+                for (int i = 0; i < coefficients.size(); i++){
+                    double value = coefficients.get(i).convolute(input.get(i));
                     result += value;
                 }
 
-                result = result / (forNormalization(necessaryCoefficients)*forNormalization(necessaryInput));
+                result = result / (forNormalization(coefficients)*forNormalization(input));
 
                 output.add(result);
             }
@@ -125,19 +125,15 @@ public class FinalLayer {
 
     public void downloadCeffSetFromFile(String filename) {
         try{
-
             File file = new File(filename);
             FileReader fr = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fr);
-
             coefficientsSet = new ArrayList<>();
-
             String string;
             List<Matrix> matrixList = new ArrayList<>();
             List<Double> doubleList = new ArrayList<>();
             List<List<Double>> doubleListList = new ArrayList<>();
             while ((string = bufferedReader.readLine())!=null){
-
                 if (string.contains("[")||string.contains("{")){
                     continue;
                 }
@@ -148,7 +144,7 @@ public class FinalLayer {
                 }
                 if (string.contains("]")){
                     matrixList.add(new MatrixClass(doubleListList));
-                    doubleList = new ArrayList<>();
+                    doubleListList = new ArrayList<>();
                     continue;
                 }
                 String[] strings = string.split(" ");
@@ -157,7 +153,6 @@ public class FinalLayer {
                 }
                 doubleListList.add(doubleList);
                 doubleList = new ArrayList<>();
-                string = bufferedReader.readLine();
             }
         }
         catch (IOException e){

@@ -67,7 +67,7 @@ public class Application {
 
         ImageProcessor imageProcessor = new ImageProcessorClass();
 
-        URL url = simpleCorrelator.getClass().getClassLoader().getResource("TestSet/rub50");
+        URL url = simpleCorrelator.getClass().getClassLoader().getResource("banknote.jpg");
         File image = null;
         try {
             image = new File(url.toURI());
@@ -85,7 +85,21 @@ public class Application {
             _char = "\\";
         }
 
-        for (File img : image.listFiles()){
+        String[] path = image.getPath().split(separator);
+        String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
+
+        List<Matrix> input = imageProcessor.loadImage(relativePath);
+
+        List<Boolean> result = simpleCorrelator.apply(input);
+
+        System.out.println("");
+        for (Boolean r: result){
+            System.out.println(r);
+        }
+        System.out.println("");
+        System.out.println("");
+
+        /*for (File img : image.listFiles()){
             String[] path = img.getPath().split(separator);
             String relativePath = path[path.length-3]+_char+path[path.length-2]+_char+path[path.length-1];
 
@@ -99,7 +113,7 @@ public class Application {
             }
             System.out.println("");
             System.out.println("");
-        }
+        }*/
 
     }
 
