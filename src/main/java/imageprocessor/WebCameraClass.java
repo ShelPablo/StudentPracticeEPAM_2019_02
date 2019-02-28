@@ -104,6 +104,7 @@ public class WebCameraClass extends JFrame {
 
     //private Dimension size = WebcamResolution.QQVGA.getSize();
     private Dimension size = WebcamResolution.QQVGA.getSize();
+    private Dimension viewSize = new Dimension();
     private List<Webcam> webcams = Webcam.getWebcams();
     private List<WebcamPanel> panels = new ArrayList<WebcamPanel>();
 
@@ -115,8 +116,9 @@ public class WebCameraClass extends JFrame {
 
         super("Test Snap Different Size");
         for (Webcam webcam : webcams) {
+            viewSize.setSize(size.getWidth()*2, size.getHeight()*2);
             webcam.setViewSize(size);
-            WebcamPanel panel = new WebcamPanel(webcam, size, false);
+            WebcamPanel panel = new WebcamPanel(webcam, viewSize, false);
             panel.setFPSDisplayed(true);
             panel.setFillArea(true);
             panels.add(panel);
