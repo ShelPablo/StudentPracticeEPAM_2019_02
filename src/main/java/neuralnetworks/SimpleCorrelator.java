@@ -15,6 +15,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +26,18 @@ public class SimpleCorrelator {
         for (int i = 0; i < 6; i++) {
             coefficientsSet.add(new ArrayList<>()
             );}
+
+        URL url = this.getClass().getClassLoader().getResource("CoeffSet.txt");
+
+        File file = null;
+        try {
+            file = new File(url.toURI());
+
+        } catch (URISyntaxException e) {
+            file = new File(url.getPath());
+        }
+
+        this.finalLayer.downloadCeffSetFromFile(file.getPath());
     }
 
     public List<List<Matrix>> getCoefficientsSet() {
@@ -119,13 +132,42 @@ public class SimpleCorrelator {
     }
 */
 
-    private List<Boolean> getDecision(List<Double> correlationCoefficients) {
-        List<Boolean> decisions = new ArrayList<>();
-        for (int i = 0; i < this.thresholds.size(); i++) {
-            decisions.add(correlationCoefficients.get(i) > this.thresholds.get(i)  );
-        }
+//    private List<Boolean> getDecision(List<Double> correlationCoefficients) {
+//        List<Boolean> decisions = new ArrayList<>();
+//        for (int i = 0; i < this.thresholds.size(); i++) {
+//            decisions.add(correlationCoefficients.get(i) > this.thresholds.get(i)  );
+//        }
+//
+//        return decisions;
+//    }
 
-        return decisions;
+    private List<Boolean> getDecision(List<Double> inputlist)
+    {
+        for (int i = 0; i < inputlist.size(); i++)
+        {
+            System.out.println(inputlist.get(i));
+        }
+        System.out.println();
+        List<Boolean> decision = new ArrayList<>();
+        double max = Collections.max(inputlist);
+        if (max < 0.51)
+        {
+            for (int i = 0; i < inputlist.size(); i++)
+            {
+                decision.add(false);
+            }
+        }
+        else {
+            for (int i = 0; i < inputlist.size(); i++) {
+                if (inputlist.get(i) < max) {
+                    decision.add(false);
+                } else {
+                    decision.add(true);
+                }
+
+            }
+        }
+        return decision;
     }
 
     public void setThresholds(List<Double> thresholds){

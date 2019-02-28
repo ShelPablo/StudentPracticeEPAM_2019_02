@@ -39,12 +39,13 @@ public class ImageLoaderClass extends JComponent implements ImageLoader
     public List<Matrix> loadImageAsMatrix(String filename) {
 
         URL url = this.getClass().getClassLoader().getResource(filename);
-        File file = null;
-        try {
-            file = new File(url.toURI());
-        } catch (URISyntaxException e) {
-            file = new File(url.getPath());
-        }
+        File file = new File(filename);
+
+//        try {
+//            file = new File(url.toURI());
+//        } catch (URISyntaxException e) {
+//            file = new File(url.getPath());
+//        }
 
         try
         {
