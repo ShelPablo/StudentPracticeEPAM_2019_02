@@ -1,10 +1,12 @@
 package layer.fully;
 
 import matrix.Matrix;
+
 import matrix.MatrixClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import java.util.List;
 
 public class PreFullyLayer {
